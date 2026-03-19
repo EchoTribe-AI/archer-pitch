@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archer × Steph Partnership Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 40px;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 18px;
+            color: #718096;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .stat-value {
+            font-size: 38px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 26px;
+            color: #2d3748;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+        }
+        
+        .section-title .emoji {
+            font-size: 32px;
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 28px;
+            color: white;
+            margin-bottom: 32px;
+        }
+        
+        .insight-box h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .insight-box p {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+        
+        thead {
+            background: #f7fafc;
+        }
+        
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            color: #2d3748;
+        }
+        
+        tr:hover {
+            background: #f7fafc;
+        }
+        
+        .asin {
+            font-family: 'Monaco', monospace;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .brand {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .price {
+            color: #48bb78;
+            font-weight: 600;
+        }
+        
+        .commission {
+            background: #f0fdf4;
+            color: #22543d;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .uplift-badge {
+            background: #48bb78;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+        }
+        
+        .rating {
+            color: #ed8936;
+            font-weight: 600;
+        }
+        
+        .tab-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .tab {
+            padding: 14px 28px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 15px;
+            font-weight: 600;
+            color: #718096;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 28px;
+        }
+        
+        .value-card {
+            background: #f7fafc;
+            padding: 28px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .value-card .icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        
+        .value-card h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2d3748;
+            font-size: 18px;
+        }
+        
+        .value-card p {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.6;
+        }
+        
+        .truncate {
+            max-width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .truncate {
+                max-width: 200px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Archer × Steph Partnership Demo</h1>
+            <p>Real affiliate performance data from @EverydaywithSteph (Mommy & Me Collective)</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">217</div>
+                <div class="stat-label">Matched Products</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$5.7K</div>
+                <div class="stat-label">Matched Revenue YTD</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$592</div>
+                <div class="stat-label">Commission Uplift</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">113K</div>
+                <div class="stat-label">Archer Products</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">51K+</div>
+                <div class="stat-label">Expansion Opps</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="insight-box">
+                <h3>🎯 Strategic Opportunity</h3>
+                <p>With 217 matched products generating $5.7K revenue and $592 in immediate commission uplift, Archer's network offers proven value on products Steph's audience already purchases. The real opportunity: 113K additional Archer products (99.4% of the catalog) provide massive expansion potential across Steph's proven categories—Toys, Beauty, Home, Baby—where she drives $375K+ annually.</p>
+            </div>
+            
+            <div class="tab-container">
+                <button class="tab active" onclick="switchTab('high-priority')">High-Priority Matches</button>
+                <button class="tab" onclick="switchTab('all-matches')">All Matches (Top 50)</button>
+                <button class="tab" onclick="switchTab('expansion')">Expansion Opportunities</button>
+                <button class="tab" onclick="switchTab('brands')">Top Brands</button>
+            </div>
+            
+            <div id="high-priority" class="tab-content active">
+                <div class="section-title">
+                    <span class="emoji">💰</span>
+                    High-Priority Commission Opportunities (>$10 uplift)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Brand</th>
+                            <th>ASIN</th>
+                            <th>Steph Revenue</th>
+                            <th>Archer Rate</th>
+                            <th>Uplift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="truncate">MAREE Violet Eye Gels - Marine Collagen Under Eye Patches for Puffy Eyes - Undereye Mask Patches for Women - Moisturizing Gel Eye Masks with Grape Wat</td>
+                            <td class="brand">MAREE</td>
+                            <td class="asin">B0DZ2DY7DN</td>
+                            <td class="price">$242.97</td>
+                            <td><span class="commission">18%</span></td>
+                            <td><span class="uplift-badge">+$36.45</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Liver Cleanse Detox & Repair - Zeolite Detox Supplement for Gut Health Cognition & Natural Energy - Glutathione NAC Chlorella Spirulina ALA Cila</td>
+                            <td class="brand">Etta Vita</td>
+                            <td class="asin">B0F33RYMVG</td>
+                            <td class="price">$50.31</td>
+                            <td><span class="commission">35%</span></td>
+                            <td><span class="uplift-badge">+$16.10</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">REVO The Original 4-in-1 Smart Cupping Therapy Massager Red Light Therapy for Targeted Pain Relief Knots Aches Muscle Soreness Circulation & Tigh</td>
+                            <td class="brand">REVOMADIC</td>
+                            <td class="asin">B0B1LKZGRD</td>
+                            <td class="price">$59.99</td>
+                            <td><span class="commission">28%</span></td>
+                            <td><span class="uplift-badge">+$15.00</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Brickhouse Security GPS Car Tracker - Hidden Tracker for Vehicles - Long Lasting Battery 140-Day LTE GPS Tracking Device for Vehicles with Magnetic Ca</td>
+                            <td class="brand">Brickhouse Security</td>
+                            <td class="asin">B07R3TBVKG</td>
+                            <td class="price">$79.92</td>
+                            <td><span class="commission">21%</span></td>
+                            <td><span class="uplift-badge">+$14.39</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Certified USDA - 100% Organic Dried Elderberries - 1lb Bulk - Non-Irradiated Non-Gmo Whole Black Elderberry Immune Support For Making Elder Syrup G</td>
+                            <td class="brand">Purify Life</td>
+                            <td class="asin">B07T3GHBR1</td>
+                            <td class="price">$39.88</td>
+                            <td><span class="commission">35%</span></td>
+                            <td><span class="uplift-badge">+$12.76</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Snap Supplements Plant-Based BCAA Powder with Nitric Oxide Booster No Artificial Flavors Support Muscle Strength and Recovery 30 Servings</td>
+                            <td class="brand">Snap Supplements</td>
+                            <td class="asin">B083NMPSK9</td>
+                            <td class="price">$62.68</td>
+                            <td><span class="commission">21%</span></td>
+                            <td><span class="uplift-badge">+$11.28</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">AUGO Retractable Ratchet Straps | 4 Heavy Duty Ratchet Straps Self Retractable Tie Down Straps with Soft Loops & Storage Bag for Motorcycle Truck Tr</td>
+                            <td class="brand">AUGO</td>
+                            <td class="asin">B0C3D8R5KM</td>
+                            <td class="price">$74.99</td>
+                            <td><span class="commission">18%</span></td>
+                            <td><span class="uplift-badge">+$11.25</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Electactic Wine Cooler 37 Bottle Freestanding Fridge with Stainless Steel Reversible Glass Door 145 Can Beverage Refrigerator Quiet Compressor for Ho</td>
+                            <td class="brand">Electactic</td>
+                            <td class="asin">B0DHKQQCY3</td>
+                            <td class="price">$262.52</td>
+                            <td><span class="commission">7%</span></td>
+                            <td><span class="uplift-badge">+$10.50</span></td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+                
+                <div class="insight-box">
+                    <h3>💡 Routing Impact</h3>
+                    <p>These 8 high-priority products ($10+ uplift each) currently route to standard Amazon affiliate links at ~3% commission. By routing through Archer's network with rates from 10-35%, Steph captures $100+ in immediate uplift on just these products. Scaling across all 217 matches yields $592 total uplift potential with zero additional work.</p>
+                </div>
+            </div>
+            
+            <div id="all-matches" class="tab-content">
+                <div class="section-title">
+                    <span class="emoji">📊</span>
+                    All Matched Products (Top 50 by Revenue)
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Brand</th>
+                            <th>Category</th>
+                            <th>Revenue</th>
+                            <th>Units</th>
+                            <th>Rate</th>
+                            <th>Uplift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="truncate">MAREE Violet Eye Gels - Marine Collagen Under Eye Patches for Puffy Eyes - Undereye Mask Patches for Women - Moisturizing Gel Eye Masks with Grape Wat</td>
+                            <td class="brand">MAREE</td>
+                            <td>Beauty & Personal Care</td>
+                            <td class="price">$242.97</td>
+                            <td>35</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$36.45</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Liver Cleanse Detox & Repair - Zeolite Detox Supplement for Gut Health Cognition & Natural Energy - Glutathione NAC Chlorella Spirulina ALA Cila</td>
+                            <td class="brand">Etta Vita</td>
+                            <td>Health & Household</td>
+                            <td class="price">$50.31</td>
+                            <td>2</td>
+                            <td><span class="commission">35%</span></td>
+                            <td>$16.10</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">REVO The Original 4-in-1 Smart Cupping Therapy Massager Red Light Therapy for Targeted Pain Relief Knots Aches Muscle Soreness Circulation & Tigh</td>
+                            <td class="brand">REVOMADIC</td>
+                            <td>Health & Household</td>
+                            <td class="price">$59.99</td>
+                            <td>1</td>
+                            <td><span class="commission">28%</span></td>
+                            <td>$15.00</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Brickhouse Security GPS Car Tracker - Hidden Tracker for Vehicles - Long Lasting Battery 140-Day LTE GPS Tracking Device for Vehicles with Magnetic Ca</td>
+                            <td class="brand">Brickhouse Security</td>
+                            <td>Electronics</td>
+                            <td class="price">$79.92</td>
+                            <td>2</td>
+                            <td><span class="commission">21%</span></td>
+                            <td>$14.39</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Certified USDA - 100% Organic Dried Elderberries - 1lb Bulk - Non-Irradiated Non-Gmo Whole Black Elderberry Immune Support For Making Elder Syrup G</td>
+                            <td class="brand">Purify Life</td>
+                            <td>Grocery & Gourmet Food</td>
+                            <td class="price">$39.88</td>
+                            <td>2</td>
+                            <td><span class="commission">35%</span></td>
+                            <td>$12.76</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Snap Supplements Plant-Based BCAA Powder with Nitric Oxide Booster No Artificial Flavors Support Muscle Strength and Recovery 30 Servings</td>
+                            <td class="brand">Snap Supplements</td>
+                            <td>Health & Household</td>
+                            <td class="price">$62.68</td>
+                            <td>2</td>
+                            <td><span class="commission">21%</span></td>
+                            <td>$11.28</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">AUGO Retractable Ratchet Straps | 4 Heavy Duty Ratchet Straps Self Retractable Tie Down Straps with Soft Loops & Storage Bag for Motorcycle Truck Tr</td>
+                            <td class="brand">AUGO</td>
+                            <td>Tools & Home Improvement</td>
+                            <td class="price">$74.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$11.25</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Electactic Wine Cooler 37 Bottle Freestanding Fridge with Stainless Steel Reversible Glass Door 145 Can Beverage Refrigerator Quiet Compressor for Ho</td>
+                            <td class="brand">Electactic</td>
+                            <td>Appliances</td>
+                            <td class="price">$262.52</td>
+                            <td>1</td>
+                            <td><span class="commission">7%</span></td>
+                            <td>$10.50</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">SpaceAid 4 Tier Rotating Bookshelf Tower Spinning Bookcase Lazy Susan Revolving 360 Book Shelf Storage Round Carousel Vertical Rotate Turning Spira</td>
+                            <td class="brand">SpaceAid</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$79.98</td>
+                            <td>1</td>
+                            <td><span class="commission">14%</span></td>
+                            <td>$8.80</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Resilia Softgels with Black Seed Oil 6000mg – Organic Oregano Oil Capsules for Immune & Digestive Support – Non-GMO Gluten-Free Softgels – Natural He</td>
+                            <td class="brand">Resilia Oil Of Oregano</td>
+                            <td>Health & Household</td>
+                            <td class="price">$56.98</td>
+                            <td>2</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$8.55</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">FIFINE XLR/USB Gaming Microphone for Streaming Podcasting PC Computer RGB Mic with Gain Knob Mute Button Monitoring Jack Gamer Mic for Recording </td>
+                            <td class="brand">FIFINE</td>
+                            <td>Musical Instruments</td>
+                            <td class="price">$44.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$6.75</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">1000 Piece Rotating Puzzle Board with Drawers and Cover - 4 Drawers Wooden Jigsaw Puzzle Table | 30” X 22”| Jigsaw Puzzle Board - Portable Puzzle Tab</td>
+                            <td class="brand">Beyond Innoventions</td>
+                            <td>Toys & Games</td>
+                            <td class="price">$59.99</td>
+                            <td>1</td>
+                            <td><span class="commission">14%</span></td>
+                            <td>$6.60</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">BEDLORE Queen Mattress Topper Viscose Derived from Bamboo Thick Pillow Top Mattress Pad with Stretchable Pockets for 6-18 inches Mattress Soft Mattr</td>
+                            <td class="brand">BEDLORE</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$43.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$6.60</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">WOOROY Lifelike Reborn Baby Dolls- 18 Inch Baby Boy Doll Full Vinyl Body Sleeping Dolls Poseable Real Life Newborn Realborn Birthday Gift Toy with D</td>
+                            <td class="brand">WOOROY</td>
+                            <td>Toys & Games</td>
+                            <td class="price">$42.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$6.45</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Googipet Premium Dog Multivitamin Chewable Dog Vitamins and Supplements Puppy Vitamins & Senior Dogs Probiotics for Gut Health + Vitamin C Glucosam</td>
+                            <td class="brand">GOOGIPET NATURAL PET PRODUCTS</td>
+                            <td>Pet Supplies</td>
+                            <td class="price">$28.49</td>
+                            <td>1</td>
+                            <td><span class="commission">25%</span></td>
+                            <td>$6.27</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">GROWNSY Nasal Aspirator for Baby Electric Baby Nose Sucker with Larger Suction Chamber and More Powerful Suction Automatic Nose Cleaner with Music a</td>
+                            <td class="brand">GROWNSY</td>
+                            <td>Baby Products</td>
+                            <td class="price">$39.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$6.00</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">CHAREX Reborn Baby Dolls - 18 inch Realistic Baby Doll Boy Real Life Baby Dolls Lifelike Newborn Baby Real Looking Birthday Gift Toy with Full Accesso</td>
+                            <td class="brand">CHAREX</td>
+                            <td>Toys & Games</td>
+                            <td class="price">$39.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$6.00</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Thermajohn Long Johns Thermal Underwear for Men Fleece Lined Base Layer Set for Cold Weather (Large Black)</td>
+                            <td class="brand">Thermajane</td>
+                            <td>Clothing, Shoes & Jewelry</td>
+                            <td class="price">$39.98</td>
+                            <td>2</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$6.00</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Cold Kicker Shower Steamers Aromatherapy - Adult Stocking Stuffer Christmas Gift - USA Made - Peppermint & Eucalyptus Shower Bomb Tablets - Soothing N</td>
+                            <td class="brand">The Herbal Zen</td>
+                            <td>Beauty & Personal Care</td>
+                            <td class="price">$39.98</td>
+                            <td>2</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$6.00</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">PIN RID - Pinworm Medicine for Family 2+ Bubble Gum Chewable Tablets (12 Doses) - 250mg Pyrantel Pamoate - Single-Dose Parasite Cleanse for Humans - </td>
+                            <td class="brand">PIN RID</td>
+                            <td>Health & Household</td>
+                            <td class="price">$39.90</td>
+                            <td>2</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$5.98</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Lucky Egg Official Grab The Mic – Family Karaoke Board Game w/Foam Mic 8+ Ages 2-10 Players - Games for Bad Singers w/ 240 Lyrics (120 Cards) (First</td>
+                            <td class="brand">Lucky Egg</td>
+                            <td>Toys & Games</td>
+                            <td class="price">$38.96</td>
+                            <td>2</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$5.84</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">GENIANI XL Electric Heating Pad for Back Pain & Cramps Relief Electric Throw Birthday Christmas Gifts for Women Men Auto Shut Off Machine Washable</td>
+                            <td class="brand">GENIANI</td>
+                            <td>Health & Household</td>
+                            <td class="price">$49.96</td>
+                            <td>1</td>
+                            <td><span class="commission">14%</span></td>
+                            <td>$5.50</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Bloomondo Empty Spice Jars with Label Pack (12x Bamboo Lid Glass Jar). Small 6oz Spice Storage Bottles with 112 Printed Stickers and 48 Writable Pantr</td>
+                            <td class="brand">Bloomondo</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$29.99</td>
+                            <td>1</td>
+                            <td><span class="commission">21%</span></td>
+                            <td>$5.40</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Marvel Spiderman 'Regulator' Toddler 4 Piece Bed Set</td>
+                            <td class="brand">Jay Franco</td>
+                            <td>Baby Products</td>
+                            <td class="price">$134.94</td>
+                            <td>3</td>
+                            <td><span class="commission">7%</span></td>
+                            <td>$5.40</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">BalanceFrom Fitness 2.3 Inch 400 Crush Proof Play Pit Balls with Mesh Storage Bag for Playpens Bounce Houses and Kiddie Pools Multicolor (3 Pack)</td>
+                            <td class="brand">BalanceFrom Fitness</td>
+                            <td>Toys & Games</td>
+                            <td class="price">$128.99</td>
+                            <td>1</td>
+                            <td><span class="commission">7%</span></td>
+                            <td>$5.16</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">ForestLeaf Vitamin B2 Riboflavin 400mg - Energy Skin & Cellular Health Supplement - Nervous System Support - Vitamin B 2 VIT B - Non-GMO & Gluten Fre</td>
+                            <td class="brand">ForestLeaf</td>
+                            <td>Health & Household</td>
+                            <td class="price">$13.55</td>
+                            <td>1</td>
+                            <td><span class="commission">40%</span></td>
+                            <td>$5.01</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">FIFINE Gaming USB Microphone for PC PS5 Condenser Mic with Quick Mute RGB Indicator Tripod Stand Pop Filter Shock Mount Gain Control for Streami</td>
+                            <td class="brand">FIFINE</td>
+                            <td>Video Games</td>
+                            <td class="price">$32.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.95</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">SUNEE 50 Packs Oversized Reusable Dry Erase Pocket Sleeves with 3 Rings 10 Assorted Colors 10x14 Ticket Holders Clear Plastic Sheet Protectors Teac</td>
+                            <td class="brand">SUNEE</td>
+                            <td>Office Products</td>
+                            <td class="price">$32.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.95</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Godinger Cake Stand with Dome 2in1 Wooden Cake Plate Serving Tray with Glass Dome Cheese Board Home Decor Housewarming Gift</td>
+                            <td class="brand">Godinger</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$43.64</td>
+                            <td>1</td>
+                            <td><span class="commission">14%</span></td>
+                            <td>$4.80</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">VEEKTOMX Portable Charger Built-in Cables10000mAh Power Bank for iPhoneFast Charge USB C Battery Pack Travel Essentials Powerbank Compatible with iP</td>
+                            <td class="brand">VEEKTOMX</td>
+                            <td>Cell Phones & Accessories</td>
+                            <td class="price">$29.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.50</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">COOK WITH COLOR Prep Bowls with Lids- Wide and Deep Nesting Plastic Small Mixing Bowl Set with Lids 12 Piece Set - Deep Bowls Sage</td>
+                            <td class="brand">COOK WITH COLOR</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$29.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.50</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Balance ONE Candida Cleanse & Yeast Support Complex – Caprylic Acid Undecylenic Acid Berberine & Oregano Leaf – Gut Flora Balance for Women & Men – </td>
+                            <td class="brand">Balance ONE</td>
+                            <td>Health & Household</td>
+                            <td class="price">$28.97</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.35</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Flux Phenom Magnetic Screen Door - Bugs Out Breeze in - 9min Install Auto-Sealing Heavy Duty Double Stitched Mesh 52 Magnets Hands Free Sliding & P</td>
+                            <td class="brand">Flux Phenom</td>
+                            <td>Tools & Home Improvement</td>
+                            <td class="price">$27.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.20</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Sleepah Bed Bumpers for Toddlers Memory Foam Rail Guards Waterproof Washable Dual Sided Non-Slip Soft Cover - Safety Guard Noodle Long Pillow Pads for</td>
+                            <td class="brand">Sleepah</td>
+                            <td>Baby Products</td>
+                            <td class="price">$27.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.20</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Waterdrop EDR3RXD1 Replacement for Everydrop® Filter 3 4396841 4396710 Kenmore® 46-9083 46-9030 WD-F08 Refrigerator Water Filter 3 Filters</td>
+                            <td class="brand">Waterdrop</td>
+                            <td>Appliances</td>
+                            <td class="price">$26.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.05</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Wool Dryer Balls - Smart Sheep 6-Pack - XL Premium Natural Fabric Softener Award-Winning - Wool Balls Replaces Dryer Sheets - Wool Balls for Dryer - L</td>
+                            <td class="brand">Smart Sheep</td>
+                            <td>Health & Household</td>
+                            <td class="price">$26.95</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$4.04</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Vitamin B Complex for Men & Women - Riboflavin B2 B12 B1 B3 B5 B6 B7 B8 B9 | Vitamin C Choline Inositol - B-Complex Supplement - Energy Bra</td>
+                            <td class="brand">NUTRAHARMONY</td>
+                            <td>Health & Household</td>
+                            <td class="price">$35.80</td>
+                            <td>2</td>
+                            <td><span class="commission">14%</span></td>
+                            <td>$3.94</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Lunakai USA Manufactured Collagen Gummies for Women & Men Over 50 Biotin & Vitamin C Supports Skin Elasticity Hair & Nail Strength Joint Support </td>
+                            <td class="brand">Lunakai</td>
+                            <td>Health & Household</td>
+                            <td class="price">$25.93</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.89</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">ixirpro Mega Balloon Shine Spray (2 x 16.9 oz) No Need Towel or Gloves Instant High Shine Gloss Brite Balloons for Party Decoration for Ultra Lasting</td>
+                            <td class="brand">ixirpro</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$24.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.75</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">DIM Supplement 200 mg | Estrogen Balance for Women & Men | Hormonal Acne Hormone Balance Menopause & Antioxidant Support | Clean Label Project Certi</td>
+                            <td class="brand">SMNutrition</td>
+                            <td>Health & Household</td>
+                            <td class="price">$24.95</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.74</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Jinx Premium Grain-Free Dry Dog Food for All Lifestages - Real Salmon Sweet Potato & Carrot Kibble with Superfoods for Immune Support & Probiotics f</td>
+                            <td class="brand">Jinx</td>
+                            <td>Pet Supplies</td>
+                            <td class="price">$52.84</td>
+                            <td>2</td>
+                            <td><span class="commission">10%</span></td>
+                            <td>$3.70</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MAREE V Line Lifting Mask with 24K Gold – Deep Collagen Face Mask for Women – Jawline Shaper Mask with Retinol & Hyaluronic Acid – Neck Tightening & F</td>
+                            <td class="brand">MAREE</td>
+                            <td>Beauty & Personal Care</td>
+                            <td class="price">$23.95</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.59</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">BEDLORE Waterproof Mattress Protector California King Size Mattress Pad with Deep Pocket 6"-18" Depth Soft Noiseless Dirt-Proof Bed Mattress Cover W</td>
+                            <td class="brand">BEDLORE</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$29.74</td>
+                            <td>1</td>
+                            <td><span class="commission">15%</span></td>
+                            <td>$3.57</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Yoofoss Fleece Baby Sleep Sack 6-12 Months with Plush Dots TOG 1.5 Baby Wearable Blanket with 2-Way Zipper Cotton Toddler Sleep Sack Fleece</td>
+                            <td class="brand">Yoofoss</td>
+                            <td>Baby Products</td>
+                            <td class="price">$23.79</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.57</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MAREE Deep Conditioning Purple Hair Mask for Blonde Hair – Purple Toner for Brassy Bleached Silver or Color Treated Hair – Hair Repair Mask Keratin</td>
+                            <td class="brand">MAREE</td>
+                            <td>Beauty & Personal Care</td>
+                            <td class="price">$23.70</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.56</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">BEDLORE California King Mattress Protector Waterproof Noiseless Mattress Cover with Deep Pocket for 6-18 inches Mattress Soft Breathable Mattress Pa</td>
+                            <td class="brand">BEDLORE</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$28.79</td>
+                            <td>1</td>
+                            <td><span class="commission">15%</span></td>
+                            <td>$3.45</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Retainer Cleanser Tablets Invisalign Cleaner Removes Odors Discoloration Stains and Plaque 4 Month Supply Denture Cleansers Retainers Mouth Guards De</td>
+                            <td class="brand">M3 Naturals</td>
+                            <td>Health & Household</td>
+                            <td class="price">$22.81</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.42</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">BalanceFrom 10x4 Feet 4-Panel Folding Gymnastics Mat – 2-Inch Thick Pad with Vinyl Surface and Carrying Handles for Tumbling Yoga Pilates Home Work</td>
+                            <td class="brand">BalanceFrom Fitness</td>
+                            <td>Sports & Outdoors</td>
+                            <td class="price">$84.99</td>
+                            <td>1</td>
+                            <td><span class="commission">7%</span></td>
+                            <td>$3.40</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Hot Vita Vitamin C Body Oil for Women – Brightening & Firming Skin Oil Hydrating Moisturizing Oil for Dry Skin Body Oil After Shower</td>
+                            <td class="brand">Hot Vita</td>
+                            <td>Beauty & Personal Care</td>
+                            <td class="price">$29.99</td>
+                            <td>1</td>
+                            <td><span class="commission">14%</span></td>
+                            <td>$3.30</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Puddle Play Toddler and Kids PVC Rain Boots with Easy On Handles - Boys and Girls Blue and Light Blue Trim - 1 Little Kid</td>
+                            <td class="brand">Puddle Play</td>
+                            <td>Clothing, Shoes & Jewelry</td>
+                            <td class="price">$21.99</td>
+                            <td>1</td>
+                            <td><span class="commission">18%</span></td>
+                            <td>$3.30</td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="expansion" class="tab-content">
+                <div class="section-title">
+                    <span class="emoji">🚀</span>
+                    Expansion Opportunities (High-Quality Archer Products to Add)
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Brand</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Commission</th>
+                            <th>Rating</th>
+                            <th>Reviews</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="truncate">Formulation Factory Heart of Steel 10 in 1 Metabolic Maximizer Nitric Oxide Supplement, Blood Pressure Support, L Arginine, L Citrulline, Natural Pre-Workout - Energy Management 360 Count (Pack of 3)</td>
+                            <td class="brand">Formulation Factory</td>
+                            <td>Health & Household</td>
+                            <td class="price">$144.99</td>
+                            <td><span class="commission">56%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>491</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Self Obsessed MAXXED: 10-in-1 Men's Vitality Formula with Shilajit, Tongkat, Ashwagandha, Maca, Fadogia, Fenugreek, Pine Pollen, Zinc, Boron & AstraGin® - 120 Capsules – 2-Month Supply (1 Pack)</td>
+                            <td class="brand">Formulation Factory</td>
+                            <td>Health & Household</td>
+                            <td class="price">$119.99</td>
+                            <td><span class="commission">56%</span></td>
+                            <td class="rating">⭐ 4.3</td>
+                            <td>1150</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Formulation Factory Heart of Steel: 10-in-1 Metabolic Maximizer Nitric Oxide Supplement, Blood Pressure Support, L Arginine, L Citrulline Natural Pre-Workout: Energy Management 240 Count (2 Pack)</td>
+                            <td class="brand">Formulation Factory</td>
+                            <td>Health & Household</td>
+                            <td class="price">$109.99</td>
+                            <td><span class="commission">56%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>491</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Formulation Factory Self Obsessed 10-in-1 Masculinity Maximizer for Men with Shilajit, Tongkat Ali, Ashwagandha & More, Muscle Growth, Energy Management, Drive, Strength & Recovery - 2 Months</td>
+                            <td class="brand">Formulation Factory</td>
+                            <td>Health & Household</td>
+                            <td class="price">$89.99</td>
+                            <td><span class="commission">56%</span></td>
+                            <td class="rating">⭐ 4.4</td>
+                            <td>322</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Lunakai Sambucus Elderberry Gummies with Zinc & Vitamin C for Adults & Kids - 100mg Black Elderberry Immune Support Supplement - Vegan, Non-GMO, No Corn Syrup, Elderberry Vitamins -6 Pack</td>
+                            <td class="brand">Lunakai</td>
+                            <td>Health & Household</td>
+                            <td class="price">$133.91</td>
+                            <td><span class="commission">35%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>1410</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Formulation Factory Boss Mode 10-in-1 Nootropic Cognitive Enhancement Supplement, Focus & Memory Booster, Featuring Lion’s Mane, Bacopa Monnieri, Alpha-GPC, Ginseng & More 120 Capsules (1 Pack)</td>
+                            <td class="brand">Formulation Factory</td>
+                            <td>Health & Household</td>
+                            <td class="price">$69.99</td>
+                            <td><span class="commission">56%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>102</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Tuck Top Kraft Paperboard Gift box 2" x 2" x 3" - Gift Boxes with Lids - Pack of 500</td>
+                            <td class="brand">MT Products</td>
+                            <td>Health & Household</td>
+                            <td class="price">$150.00</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>409</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Damascus Knife - Chef Knife, Kitchen Knife Chefs knife</td>
+                            <td class="brand">KUMA</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.97</td>
+                            <td><span class="commission">23%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>439</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">100% Pure New Zealand Manuka Honey, Certified UMF 25+ (MGO 1197+) Raw Manuka Honey, 8.8 Oz (250g)</td>
+                            <td class="brand">100% Pure New Zealand Honey</td>
+                            <td>Grocery & Gourmet Food</td>
+                            <td class="price">$149.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.5</td>
+                            <td>675</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products PET Plastic Juice Bottles 16 oz. - Clear Take-Out Containers (Pack of 160) - Made in USA</td>
+                            <td class="brand">MT Products</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$144.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>823</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Multivitamin for Women Gummies - Tastiest Proprietary Formula - 100% Daily Value of 16 Essential Vitamins and Minerals (Vitamins A,B,C,D,E) Healthy,Non-GMO Chewable Womens Multivitamin Gummy - 6 Pack</td>
+                            <td class="brand">Lunakai</td>
+                            <td>Health & Household</td>
+                            <td class="price">$119.93</td>
+                            <td><span class="commission">31%</span></td>
+                            <td class="rating">⭐ 4.3</td>
+                            <td>798</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">KUMA Professional Damascus Knife - 8 Inch Japanese Chef Knife, AUS10 Core - Corrosion And Stain Resistant - G10 Handle & Sheath Made Of Hardened Carbon steel</td>
+                            <td class="brand">KUMA</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$144.97</td>
+                            <td><span class="commission">23%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>439</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products White Plastic/Poly Apron 46" x 28" - Disposable Kitchen Apron - Pack of 500</td>
+                            <td class="brand">MT Products</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.3</td>
+                            <td>327</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Formulation Factory She's Obsessed: 10-in-1 Hormone Balance Maximizer with Shilajit, Maca, Ashwagandha, DIM, Dong Quai, Zinc & More for Vitality & Balance – 120 Capsules 2 Months</td>
+                            <td class="brand">Formulation Factory</td>
+                            <td>Health & Household</td>
+                            <td class="price">$59.99</td>
+                            <td><span class="commission">56%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>115</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Brown Wine Paper Bags Quart Size - 4.5" x 2.5" x 16" Great Used as a Wine Bag or For Freshly Baked Goods - Case of 1000</td>
+                            <td class="brand">MT Products</td>
+                            <td>Health & Household</td>
+                            <td class="price">$135.00</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>692</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Aluminum Foil Clam Shells - Disposable Pie Tins for Serving - Pack of 400</td>
+                            <td class="brand">MT Products</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$135.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.5</td>
+                            <td>464</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Tuck Top Kraft Paperboard Gift box 3" x 3" x 4" - Gift Boxes with Lids - Pack of 200</td>
+                            <td class="brand">MT Products</td>
+                            <td>Health & Household</td>
+                            <td class="price">$129.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>409</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Off-White Round Paper Coasters for Drinks - 4” Blank Disposable Coasters (Pack of 1000) - Made in The USA</td>
+                            <td class="brand">MT Products</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$130.00</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>309</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Off-White Square Paper Coasters for Drinks - 4” Blank Disposable Coasters (Pack of 1000) - Made in The USA</td>
+                            <td class="brand">MT Products</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$130.00</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>309</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Clear Plastic Disposable Banana Split Boats 12 oz. - Ice Cream Sundae Bowls (Pack of 500) - Made in the USA</td>
+                            <td class="brand">MT Products</td>
+                            <td>Health & Household</td>
+                            <td class="price">$129.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>796</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Formulation Factory Melt Mode 10-in-1 Wellness Supplement with Green Tea Extract, L-Carnitine, CLA, Glucomannan, Apple Cider Vinegar & More, Supports Metabolism & Energy (2 Month Supply, 120 Capsules)</td>
+                            <td class="brand">Formulation Factory</td>
+                            <td>Health & Household</td>
+                            <td class="price">$89.99</td>
+                            <td><span class="commission">35%</span></td>
+                            <td class="rating">⭐ 4.5</td>
+                            <td>169</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products 4” Blank Off-White Heavyweight Cardboard Square Coasters for Your Beverages 2 MM Thickness (Case of 1000) - Made in The USA</td>
+                            <td class="brand">MT Products</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$126.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>777</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products 4" Blank Off-White Heavyweight Round Paper Coasters for Drinks Absorbent Disposable - 2mm Blank Paper Coasters for Your Beverages (Case of 1000) - Made in The USA</td>
+                            <td class="brand">MT Products</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$126.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>775</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Large White Matte Teardrop Urn with Golden Heart for Human Ashes Male - Earns for Adult Men and Women - Cremation Urns for Ash, Funeral/Burial Urns, Decorative and Keepsake ERN, Heart Urn, 2.5 LTR</td>
+                            <td class="brand">KEEPSAKE COMPANY</td>
+                            <td>Health & Household</td>
+                            <td class="price">$149.99</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.9</td>
+                            <td>131</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Grey Multicolor Tear Drop Urn for Ash - Heart Urns for Human Ashes Adult -Cremation Urns for Adult Ashes -Decorative Urns - 10 Inches high and 2.5 litres Volume.</td>
+                            <td class="brand">KEEPSAKE COMPANY</td>
+                            <td>Health & Household</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.9</td>
+                            <td>126</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Manuka Honey New Zealand - Certified UMF 20+ (MGO 826+) 100% Pure New Zealand Manuka Honey, New Zealand's Awarded Manuka Honey, 17.6 Ounce (500g) Ultra-Premium, Raw Manuka Honey</td>
+                            <td class="brand">100% Pure New Zealand Honey</td>
+                            <td>Grocery & Gourmet Food</td>
+                            <td class="price">$119.99</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.5</td>
+                            <td>278</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Ultimate Slicer Sujihiki Knife - 10.5 inch - Shogun Series ELITE - The Tokugawa - Damascus Slicing Knife - AUS-10V Japanese Super Steel Kitchen Slicer Saya - Kitchen Knife - Sheath Included</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.8</td>
+                            <td>1538</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Spanish Style Meat & Ham Slicer - 12 inch - Shogun Series Elite - High-Carbon AUS-10V Japanese Super Steel Kitchen Knife - Slicing Knife - BBQ Brisket Carving Knife - w/Sheath</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.8</td>
+                            <td>1492</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">DALSTRONG Bull Nose Butcher Knife - 10 inch - Shogun Series ELITE - Japanese AUS-10V Super Steel - Vacuum Heat Treatment - with Sheath - Meat, BBQ, Breaking Knife - Kitchen Knife - BBQ, Brisket</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.8</td>
+                            <td>499</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">DALSTRONG Bull Nose Butcher Knife - 8 inch - Shogun Series ELITE - Japanese AUS-10V Super Steel - Vacuum Heat Treatment - Sheath Included - Meat, BBQ, Breaking Knife - Carving Knife - Heavy Duty</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.8</td>
+                            <td>499</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Nakiri Knife - 7 inch - Valhalla Series - 9CR18MOV High Carbon Steel - Vegetable Kitchen Knife - Celestial Resin & Wood Handle - Razor Sharp Asian Knife - w/Sheath</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.8</td>
+                            <td>403</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Santoku Knife - 7 inch - Valhalla Series - 9CR18MOV High Carbon Steel - Vegetable Knife - Celestial Resin & Wood Handle - Asian Cooking Knife - Premium Kitchen Knife - w/Leather Sheath</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.8</td>
+                            <td>403</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Pitmaster BBQ & Meat Knife - 8 inch - Shogun Series ELITE - Forked Tip & Bottle Opener - Japanese AUS-10V Super Steel Kitchen Knife - G10 Handle - Razor Sharp - w/Sheath</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.8</td>
+                            <td>233</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Gasbye Vacuum Sealer Machine, 95kPa Food Sealer with Double Heat Seal for Dry/Moist Food, Easy-lock Handle, Built-in Bag Storage & Cutter, Progress Display, Removable Drip Tray, Silver</td>
+                            <td class="brand">Gasbye</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$129.99</td>
+                            <td><span class="commission">21%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>872</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Eco Crave Jute Rug 6x9 Ft, Hand Woven Rug, Tightly Woven Jute Area Rug for Living Room, Bedroom, Kitchen, Dining & Farmhouse, Natural Biodegradable Braided Rug for Home Decor(0.5 Inch Thick)</td>
+                            <td class="brand">Eco Crave</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.99</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>218</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">MT Products Candy and Chocolate Gift Box - 250 Pieces Extra Small White Fudge Box - Size of 5 x 2 1/4 x 1 1/4</td>
+                            <td class="brand">MT Products</td>
+                            <td>Health & Household</td>
+                            <td class="price">$120.00</td>
+                            <td><span class="commission">24%</span></td>
+                            <td class="rating">⭐ 4.4</td>
+                            <td>412</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Chef Knife - 8 inch Blade - Shogun Series ELITE - Damascus - Japanese AUS-10V Super Steel - G10 Black Handle - Razor Sharp - Professional Full Tang Chef's Knife - Sheath</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>2575</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Chef Knife - 8 inch Blade - Shogun Series - Japanese AUS-10V Super Steel Kitchen Knife - Olive Wood Handle - Damascus - Razor Sharp Knife - Professional Full Tang Knives - Sheath Included</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>2575</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">DALSTRONG Premium Whetstone Kit - #1000/#6000 Knife Sharpening Kit - Extra Large Grit Stones - Top-Grade Corundum - Thick Knife Sharpening Stone - Hand Crafted Acacia Wood - Whetstone Knife Sharpener</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Tools & Home Improvement</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>1476</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Meat Cleaver Knife - 7 inch - Shogun Series ELITE - Razor Sharp - Japanese AUS-10V Super Steel - Damascus Kitchen Knife - Hammered Finish - Heavy DutyCooking Knife - Sheath Included</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>1065</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">DALSTRONG Butcher Knife - 8 inch - Shogun Series ELITE - Japanese AUS-10V Super Steel - G10 Handle - Vacuum Treated - Meat, Kitchen Slicer - Razor Sharp Breaking Knife - BBQ Knife - Sheath Included</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>1043</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">DALSTRONG Hybrid Cleaver & Chef Knife - 8 inch - Shogun Series ELITE - The 'Crixus' - Japanese AUS-10V Super Steel Kitchen Knife - Black Handle - Razor Sharp Knife - Meat Cleaver Heavy Duty - w/Sheath</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>879</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Professional Chef's Kitchen Apron - Brown 'Desert Drifter' - Heavy Duty Waxed Canvas - Premium Extra Durability - 5 Storage Pockets + Towel & Tong Loop - Leather Accents - Liquid Repellent</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>532</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Professional Chef's Kitchen Apron - Sous Team 6" - Heavy Duty Waxed Canvas - 5 Storage Pockets + Towel & Tong Loop - Liquid Repellent Coating - Genuine Leather Accents - Adjustable Straps</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>532</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Dalstrong Hybrid Cleaver & Chef Knife - 8 inch - 'The Crixus' - Delta Wolf Series - Ultra-Thin & Zero Friction Blade HC 9CR18MOV Steel - Black Titanium Nitride Coating - G10 Camo Handle - Sheath</td>
+                            <td class="brand">Dalstrong</td>
+                            <td>Home & Kitchen</td>
+                            <td class="price">$149.00</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>157</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Large Purple Teardrop Urn for Human Ashes Male - Earns for Adult Men and Women - Cremation Urns for Ash, Funeral/Burial Urns, Decorative and Unique Keepsake ERN, Heart Urn, 2.5 LTR Volume</td>
+                            <td class="brand">KEEPSAKE COMPANY</td>
+                            <td>Health & Household</td>
+                            <td class="price">$142.79</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.9</td>
+                            <td>133</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Otafuku Gluten Free Eel Sauce, Japanese Unagi Sauce for Sushi Rolls, Sashimi, Rice and Poke, Restaurant Bulk Size 1/2 Gallon (6 Pack)</td>
+                            <td class="brand">Otafuku</td>
+                            <td>Grocery & Gourmet Food</td>
+                            <td class="price">$147.99</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.7</td>
+                            <td>927</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">12' x 40' Super Heavy Duty 16 Mil Brown Poly Tarp Cover - Thick Waterproof, UV Resistant, Rip and Tear Proof Tarpaulin with Grommets and Reinforced Edges - by Xpose Safety</td>
+                            <td class="brand">Xpose Safety</td>
+                            <td>Tools & Home Improvement</td>
+                            <td class="price">$149.99</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>13376</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">PACK of 2 Morning Pep Pure Birch Xylitol (Keto Diet Friendly) Sweetener with no aftertaste BULK SIZE 10 LBs (Not From Corn) NON GMO KOSHER GLUTEN FREE PRODUCT OF USA. Total 20 Lbs (320 OZ)</td>
+                            <td class="brand">Morning Pep</td>
+                            <td>Grocery & Gourmet Food</td>
+                            <td class="price">$149.99</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>5798</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="truncate">Chromex Tankless Water Heater Flush Kit with Gallon Liquid Descaling Solution and 1/6HP Extra Strength Pump</td>
+                            <td class="brand">Chromex</td>
+                            <td>Tools & Home Improvement</td>
+                            <td class="price">$149.99</td>
+                            <td><span class="commission">18%</span></td>
+                            <td class="rating">⭐ 4.6</td>
+                            <td>945</td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+                
+                <div class="insight-box">
+                    <h3>📈 Expansion Criteria</h3>
+                    <p>These 50+ products meet strict quality filters: 4.3+ rating, 100+ reviews, $10-$150 price range (Steph's sweet spot), and 6%+ commission. Many are in Steph's proven categories where she already drives significant revenue—making them high-probability converts when added to her recommendation engine.</p>
+                </div>
+            </div>
+            
+            <div id="brands" class="tab-content">
+                <div class="section-title">
+                    <span class="emoji">🏷️</span>
+                    Top Archer Brands (by Steph's Revenue Performance)
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Revenue</th>
+                            <th>Units Sold</th>
+                            <th>Products</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="brand">MAREE</td>
+                            <td class="price">$384.51</td>
+                            <td>47</td>
+                            <td>11</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Jay Franco</td>
+                            <td class="price">$359.35</td>
+                            <td>11</td>
+                            <td>9</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Electactic</td>
+                            <td class="price">$262.52</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">BalanceFrom Fitness</td>
+                            <td class="price">$213.98</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Phomemo</td>
+                            <td class="price">$190.47</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">RENPHO</td>
+                            <td class="price">$168.11</td>
+                            <td>5</td>
+                            <td>3</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">BEDLORE</td>
+                            <td class="price">$159.06</td>
+                            <td>7</td>
+                            <td>8</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Nostalgia</td>
+                            <td class="price">$132.53</td>
+                            <td>5</td>
+                            <td>4</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">NAKED</td>
+                            <td class="price">$130.47</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">SpaceAid</td>
+                            <td class="price">$127.93</td>
+                            <td>4</td>
+                            <td>4</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">NUTRAHARMONY</td>
+                            <td class="price">$120.97</td>
+                            <td>6</td>
+                            <td>5</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Chefman</td>
+                            <td class="price">$109.98</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Mighty Paw</td>
+                            <td class="price">$102.05</td>
+                            <td>5</td>
+                            <td>4</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Brickhouse Security</td>
+                            <td class="price">$79.92</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">FIFINE</td>
+                            <td class="price">$77.98</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">AUGO</td>
+                            <td class="price">$74.99</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Jinx</td>
+                            <td class="price">$71.50</td>
+                            <td>5</td>
+                            <td>3</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Waterdrop</td>
+                            <td class="price">$70.10</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">Snap Supplements</td>
+                            <td class="price">$62.68</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+    
+                        <tr>
+                            <td class="brand">REVOMADIC</td>
+                            <td class="price">$59.99</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+                
+                <div class="insight-box">
+                    <h3>🎯 Brand Growth Strategy</h3>
+                    <p>These brands are already generating revenue through Steph's standard affiliate links. With Archer's higher commission rates on their full product catalogs, there's opportunity to both optimize existing products AND expand coverage of proven brands her audience already trusts and purchases.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🎯</span>
+                EchoTribe Value Proposition for Archer
+            </div>
+            
+            <div class="insight-box">
+                <h3>Dual-Layer Control = Market Advantage</h3>
+                <p>LTK controls recommendations but can't control routing. Impact/CJ control routing but can't control recommendations. EchoTribe is the only platform that controls BOTH layers simultaneously—meaning we determine what gets recommended to creators' audiences AND where that traffic routes for maximum conversion and commission optimization.</p>
+            </div>
+            
+            <div class="value-prop-grid">
+                <div class="value-card">
+                    <div class="icon">🤖</div>
+                    <h4>AI Recommendation Layer</h4>
+                    <p>Hot Score algorithm prioritizes Archer products with proven conversion history. The top 20 highest-performing products inject directly into each creator's AI chatbot recommendations.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="icon">🔗</div>
+                    <h4>Smart Link Infrastructure</h4>
+                    <p>Geo-aware routing with go.echotribe.com sends US traffic to Archer while international traffic routes to local affiliate networks—maximizing EPC across all geos.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="icon">📊</div>
+                    <h4>Performance Dashboard</h4>
+                    <p>Real-time attribution tracking shows exactly which Archer products convert best for each creator, feeding back into the recommendation algorithm for continuous optimization.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="icon">🌍</div>
+                    <h4>Scale Beyond Steph</h4>
+                    <p>This Steph prototype proves the concept. Next: replicate across GoLikely's 2,000 international creators, all routing qualified US traffic to Archer's network.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">📈</span>
+                Next Steps
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="background: #f7fafc; padding: 24px; border-radius: 12px; border-left: 4px solid #667eea;">
+                    <h4 style="margin-bottom: 12px; color: #2d3748; font-weight: 600;">1. Validate Attribution</h4>
+                    <p style="font-size: 14px; color: #718096;">Confirm whose affiliate account (Steph's, Yan's, or Archer's) receives conversion credit when EchoTribe routes traffic through the smart link layer.</p>
+                </div>
+                
+                <div style="background: #f7fafc; padding: 24px; border-radius: 12px; border-left: 4px solid #667eea;">
+                    <h4 style="margin-bottom: 12px; color: #2d3748; font-weight: 600;">2. Build go.echotribe.com</h4>
+                    <p style="font-size: 14px; color: #718096;">Deploy the ~50-line smart link redirect server to enable real-time routing decisions based on product ASIN + geo + conversion data.</p>
+                </div>
+                
+                <div style="background: #f7fafc; padding: 24px; border-radius: 12px; border-left: 4px solid #667eea;">
+                    <h4 style="margin-bottom: 12px; color: #2d3748; font-weight: 600;">3. Pilot with Steph</h4>
+                    <p style="font-size: 14px; color: #718096;">Route Steph's existing 217 matched products through Archer for 30 days. Validate $592 uplift and track any conversion rate impact.</p>
+                </div>
+                
+                <div style="background: #f7fafc; padding: 24px; border-radius: 12px; border-left: 4px solid #667eea;">
+                    <h4 style="margin-bottom: 12px; color: #2d3748; font-weight: 600;">4. Scale to GoLikely</h4>
+                    <p style="font-size: 14px; color: #718096;">Replicate Steph's creator template across GoLikely's 2,000-creator network, routing US affiliate traffic through Archer's higher-commission catalog.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
