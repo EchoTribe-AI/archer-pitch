@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archer × EchoTribe — A Proposal</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #fafaf8;
+    --bg2: #f2f2ef;
+    --surface: #ffffff;
+    --surface2: #f0f0ed;
+    --text: #1a1a17;
+    --text2: #3c3c38;
+    --text3: #606058;
+    --text4: #999890;
+    --border: rgba(0,0,0,0.09);
+    --border2: rgba(0,0,0,0.16);
+    --blue: #1c5fa6;
+    --blue-mid: #2e7dd4;
+    --blue-light: #e8f2fc;
+    --blue-text: #0f4a8a;
+    --green: #27693a;
+    --green-light: #e6f4eb;
+    --amber: #8a5510;
+    --amber-light: #fbeedd;
+    --red: #a02828;
+    --red-light: #fbe9e9;
+    --teal: #0a6b52;
+    --teal-light: #e2f5ee;
+    --purple: #5a3d8a;
+    --purple-light: #f0eafa;
+    --r: 8px; --rlg: 12px;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --mono: 'SF Mono', 'Fira Mono', 'Cascadia Mono', monospace;
+  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .shell { max-width: 880px; margin: 0 auto; padding: 0 28px 80px; }
+
+  .header { padding: 56px 0 44px; border-bottom: 0.5px solid var(--border2); margin-bottom: 64px; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 14px; }
+  .page-title { font-family: var(--font-serif); font-size: 38px; font-weight: 400; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px; }
+  .page-title em { color: var(--blue-mid); font-style: normal; }
+  .page-sub { font-size: 15px; color: var(--text3); max-width: 620px; line-height: 1.75; margin-bottom: 24px; }
+  .header-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hmeta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid; }
+  .hmeta-blue { color: var(--blue); border-color: var(--blue); background: var(--blue-light); }
+  .hmeta-gray { color: var(--text4); border-color: var(--border2); background: var(--surface2); }
+
+  .section { margin-bottom: 72px; }
+  .section-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 8px; }
+  .section-title { font-family: var(--font-serif); font-size: 28px; font-weight: 400; color: var(--text); margin-bottom: 8px; letter-spacing: -0.3px; line-height: 1.25; }
+  .section-sub { font-size: 13px; color: var(--text3); margin-bottom: 28px; line-height: 1.7; max-width: 660px; }
+
+  /* FOUR PRODUCTS */
+  .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+  .product-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); overflow: hidden; }
+  .pc-head { padding: 14px 16px 12px; border-bottom: 0.5px solid var(--border); }
+  .pc-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .pc-name { font-size: 15px; font-weight: 500; color: var(--text); }
+  .pc-body { padding: 12px 16px; }
+  .pc-desc { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+  .pc-applies { font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text4); margin-top: 10px; padding-top: 8px; border-top: 0.5px solid var(--border); }
+  .card-signal .pc-head { background: var(--blue-light); } .card-signal .pc-tag { color: var(--blue-mid); }
+  .card-route .pc-head { background: var(--teal-light); } .card-route .pc-tag { color: var(--teal); }
+  .card-agent .pc-head { background: var(--purple-light); } .card-agent .pc-tag { color: var(--purple); }
+  .card-boost .pc-head { background: var(--amber-light); } .card-boost .pc-tag { color: var(--amber); }
+
+  /* ARCH STACK */
+  .arch-stack { display: flex; flex-direction: column; gap: 2px; margin-bottom: 18px; }
+  .arch-layer { border-radius: var(--r); padding: 13px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .al-signal { background: var(--blue-light); border: 0.5px solid rgba(46,125,212,0.3); }
+  .al-route { background: var(--teal-light); border: 0.5px solid rgba(10,107,82,0.3); }
+  .al-agent { background: var(--purple-light); border: 0.5px solid rgba(90,61,138,0.3); }
+  .al-boost { background: var(--amber-light); border: 0.5px solid rgba(138,85,16,0.3); }
+  .al-archer { background: var(--green-light); border: 0.5px solid rgba(39,105,58,0.3); }
+  .al-shared { background: var(--bg2); border: 0.5px solid var(--border2); }
+  .al-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 3px; }
+  .al-name { font-size: 13px; font-weight: 500; }
+  .al-right { font-size: 11.5px; max-width: 300px; text-align: right; color: var(--text3); }
+  .al-signal .al-tag { color: var(--blue-mid); } .al-signal .al-name { color: var(--blue-text); }
+  .al-route .al-tag, .al-route .al-name { color: var(--teal); }
+  .al-agent .al-tag, .al-agent .al-name { color: var(--purple); }
+  .al-boost .al-tag, .al-boost .al-name { color: var(--amber); }
+  .al-archer .al-tag, .al-archer .al-name { color: var(--green); }
+  .al-shared .al-tag { color: var(--text4); } .al-shared .al-name { color: var(--text3); }
+  .stack-arrow { text-align: center; font-size: 11px; color: var(--text4); padding: 2px 0; font-family: var(--mono); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+  .lg-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text3); }
+  .lg-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* TABS */
+  .aff-tabs { display: flex; gap: 0; border-bottom: 0.5px solid var(--border2); margin-bottom: 28px; overflow-x: auto; scrollbar-width: none; }
+  .aff-tabs::-webkit-scrollbar { display: none; }
+  .aff-tab { padding: 10px 20px; font-size: 12.5px; color: var(--text3); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; font-family: var(--font); transition: all 0.15s; }
+  .aff-tab.active { color: var(--text); font-weight: 500; border-bottom-color: var(--blue-mid); }
+  .aff-pane { display: none; }
+  .aff-pane.active { display: block; }
+
+  /* PROFILE */
+  .profile-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); padding: 20px 22px; margin-bottom: 20px; display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+  .profile-avatar { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; background: var(--bg2); border: 0.5px solid var(--border2); }
+  .profile-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .profile-type { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3px; color: var(--text4); margin-bottom: 10px; }
+  .profile-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+  .ptag { font-size: 11px; background: var(--bg2); border: 0.5px solid var(--border); border-radius: 20px; padding: 2px 10px; color: var(--text3); }
+  .ptag strong { color: var(--text2); font-weight: 500; }
+
+  /* FLOW */
+  .flow { display: flex; flex-direction: column; gap: 0; }
+  .flow-step { display: grid; grid-template-columns: 42px 1fr; gap: 0 14px; position: relative; }
+  .flow-step:not(:last-child) .fs-line { position: absolute; left: 20px; top: 42px; bottom: -4px; width: 0.5px; background: linear-gradient(to bottom, var(--border2), transparent); }
+  .fs-dot { width: 42px; height: 42px; border-radius: 50%; border: 0.5px solid var(--border2); background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; position: relative; z-index: 1; }
+  .fs-body { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); padding: 14px 16px; margin-bottom: 10px; }
+  .fs-product { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .fp-signal { color: var(--blue-mid); } .fp-route { color: var(--teal); } .fp-agent { color: var(--purple); } .fp-boost { color: var(--amber); }
+  .fs-title { font-size: 13.5px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+  .fs-desc { font-size: 12.5px; color: var(--text2); line-height: 1.65; }
+  .fs-desc strong { color: var(--text); }
+  .fs-metric { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; padding: 2px 9px; border-radius: 20px; margin-top: 8px; }
+  .fm-green { background: var(--green-light); color: var(--green); border: 0.5px solid rgba(39,105,58,0.3); }
+  .fm-blue { background: var(--blue-light); color: var(--blue-text); border: 0.5px solid rgba(46,125,212,0.3); }
+
+  /* PROOF */
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  .proof-card { background: var(--surface); border: 0.5px solid var(--border2); border-radius: var(--r); padding: 16px 18px; }
+  .pcard-num { font-family: var(--mono); font-size: 24px; font-weight: 500; color: var(--blue-mid); letter-spacing: -1px; line-height: 1; margin-bottom: 5px; }
+  .pcard-label { font-size: 11.5px; color: var(--text3); line-height: 1.4; }
+  .pcard-sub { font-size: 10.5px; color: var(--text4); margin-top: 3px; }
+  .case-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); padding: 20px 22px; margin-bottom: 12px; }
+  .cb-label { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text4); margin-bottom: 14px; }
+  .cb-flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .cb-node { text-align: center; padding: 8px 14px; }
+  .cb-num { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--text); letter-spacing: -0.5px; }
+  .cb-lbl { font-size: 10.5px; color: var(--text4); margin-top: 3px; }
+  .cb-arrow { font-size: 16px; color: var(--border2); }
+  .cb-result { background: var(--green-light); border: 0.5px solid rgba(39,105,58,0.3); border-radius: var(--r); padding: 8px 14px; text-align: center; }
+  .cb-result .cb-num { color: var(--green); }
+  .cb-result .cb-lbl { color: var(--green); }
+  .cb-note { font-size: 12px; color: var(--text3); padding-top: 14px; border-top: 0.5px solid var(--border); line-height: 1.65; }
+  .cb-note strong { color: var(--text2); }
+
+  /* OPTIONALITY */
+  .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  .option-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); overflow: hidden; }
+  .option-card.preferred { border-color: var(--blue-mid); }
+  .option-head { padding: 14px 18px 12px; border-bottom: 0.5px solid var(--border); background: var(--surface2); }
+  .oh-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--text4); margin-bottom: 5px; }
+  .oh-title { font-size: 15px; font-weight: 500; color: var(--text); }
+  .oh-badge { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 9px; border-radius: 20px; margin-top: 6px; border: 0.5px solid; }
+  .badge-pref { background: var(--blue-light); color: var(--blue-text); border-color: var(--blue-mid); }
+  .badge-alt { background: var(--bg2); color: var(--text4); border-color: var(--border2); }
+  .option-body { padding: 14px 18px; }
+  .option-desc { font-size: 12.5px; color: var(--text2); line-height: 1.7; margin-bottom: 12px; }
+  .ol-item { font-size: 12px; color: var(--text3); display: flex; gap: 8px; padding: 4px 0; border-bottom: 0.5px solid var(--border); line-height: 1.5; }
+  .ol-item:last-child { border-bottom: none; }
+  .ol-arrow { color: var(--blue-mid); flex-shrink: 0; }
+  .ol-item strong { color: var(--text2); }
+
+  .walmart-bar { background: var(--amber-light); border: 0.5px solid var(--amber); border-left: 3px solid var(--amber); border-radius: 0 var(--r) var(--r) 0; padding: 14px 18px; margin-bottom: 10px; }
+  .wb-label { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+  .wb-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .wb-text strong { color: var(--text); }
+
+  /* DEAL PATHS */
+  .deal-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+  .deal-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); overflow: hidden; }
+  .deal-card.preferred { border-color: var(--blue-mid); }
+  .deal-head { padding: 14px 18px; border-bottom: 0.5px solid var(--border); background: var(--surface2); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .dh-path { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--text4); margin-bottom: 4px; }
+  .dh-name { font-size: 15px; font-weight: 500; color: var(--text); }
+  .dh-badge { font-family: var(--mono); font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; border: 0.5px solid; white-space: nowrap; }
+  .db-blue { background: var(--blue-light); color: var(--blue-text); border-color: var(--blue-mid); }
+  .db-gray { background: var(--bg2); color: var(--text4); border-color: var(--border2); }
+  .deal-body { padding: 16px 18px; }
+  .deal-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 14px; }
+  .deal-terms { display: flex; flex-direction: column; gap: 7px; }
+  .dt-row { display: flex; gap: 12px; font-size: 12px; align-items: flex-start; }
+  .dt-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text4); min-width: 82px; margin-top: 1px; flex-shrink: 0; }
+  .dt-val { color: var(--text2); line-height: 1.5; }
+  .dt-val strong { color: var(--text); }
+
+  .position-bar { background: var(--text); border-radius: var(--rlg); padding: 28px 32px; margin-bottom: 16px; }
+  .pb-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
+  .pb-text { font-size: 18px; color: #fff; line-height: 1.6; font-family: var(--font-serif); font-weight: 400; }
+  .pb-text em { color: #78b4f0; font-style: normal; }
+  .pb-sub { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 12px; line-height: 1.65; }
+
+  .footer { border-top: 0.5px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-brand { font-size: 14px; color: var(--text4); }
+  .footer-brand span { color: var(--blue-mid); }
+  .footer-note { font-family: var(--mono); font-size: 10px; color: var(--text4); }
+
+  @media (max-width: 640px) {
+    .proof-grid, .product-grid, .option-grid { grid-template-columns: 1fr; }
+    .al-right { display: none; }
+    .page-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="header">
+    <div class="eyebrow">EchoTribe × Archer Affiliates · 2026</div>
+    <div class="page-title">Archer has the network.<br>EchoTribe has the <em>intelligence layer</em> above it.</div>
+    <div class="page-sub">EchoTribe is a four-product intelligence stack built to make every affiliate in a network — social creators and content publishers alike — earn more from the traffic they already have. This doc covers what's been proven, how it fits Archer, and how we structure it together.</div>
+    <div class="header-meta">
+      <div class="hmeta hmeta-blue">Prepared for Juda & David</div>
+      <div class="hmeta hmeta-gray">March 2026</div>
+    </div>
+  </div>
+
+  <!-- FOUR PRODUCTS -->
+  <div class="section">
+    <div class="section-eyebrow">The Intelligence Stack</div>
+    <div class="section-title">Four products. One closed loop.</div>
+    <div class="section-sub">Each product does one job precisely. Together they cover the full path from detecting what's working, to routing for maximum EPC, to creating content, to amplifying with paid spend — across any affiliate type in the network.</div>
+
+    <div class="product-grid">
+      <div class="product-card card-signal">
+        <div class="pc-head"><div class="pc-tag">EchoSignal</div><div class="pc-name">Monitor & Detect</div></div>
+        <div class="pc-body">
+          <div class="pc-desc">Watches every affiliate in the network — creator posts, publisher content pages, link click velocity — and surfaces which products and which pieces of content are outperforming right now. Updated every 48 hours. Flags amplification windows before they close.</div>
+          <div class="pc-applies">Applies to: social creators + content publishers</div>
+        </div>
+      </div>
+      <div class="product-card card-route">
+        <div class="pc-head"><div class="pc-tag">EchoRoute</div><div class="pc-name">Route & Maximize EPC</div></div>
+        <div class="pc-body">
+          <div class="pc-desc">Delivers the highest-EPC link for every product click — routing to the merchant with the best commission rate and conversion rate for that affiliate's specific audience. Not Amazon by default. The right merchant, determined by real CVR data.</div>
+          <div class="pc-applies">Applies to: any affiliate with multi-merchant options</div>
+        </div>
+      </div>
+      <div class="product-card card-agent">
+        <div class="pc-head"><div class="pc-tag">EchoAgent</div><div class="pc-name">Create & Engage</div></div>
+        <div class="pc-body">
+          <div class="pc-desc">Curates product collages and shoppable posts from EchoSignal's top-performing products, ready to publish. Also engages audiences in real time — answering product questions with affiliate-linked recommendations. Every answer is a monetized touchpoint.</div>
+          <div class="pc-applies">Applies to: social creators + publisher content pages</div>
+        </div>
+      </div>
+      <div class="product-card card-boost">
+        <div class="pc-head"><div class="pc-tag">EchoBoost</div><div class="pc-name">Amplify & Convert</div></div>
+        <div class="pc-body">
+          <div class="pc-desc">Uses EchoSignal's top content + EchoRoute's top merchant to identify the exact moment and product to amplify — then enables brands or affiliates to build ads and push them into Meta, TikTok, and beyond. Signal, routing, and spend all in one motion.</div>
+          <div class="pc-applies">Applies to: brands funding campaigns + affiliates self-boosting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <div class="section">
+    <div class="section-eyebrow">The Architecture</div>
+    <div class="section-title">Where EchoTribe sits inside Archer</div>
+    <div class="section-sub">EchoTribe's four intelligence products layer above Archer's commission infrastructure — routing more qualified, higher-converting traffic through it and surfacing amplification opportunities that brands can fund directly.</div>
+
+    <div class="arch-stack">
+      <div class="arch-layer al-signal">
+        <div><div class="al-tag">EchoSignal</div><div class="al-name">Monitor top-performing products & content across all Archer affiliates</div></div>
+        <div class="al-right">Creator posts + publisher pages. Flags what's converting before any spend goes in.</div>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="arch-layer al-route">
+        <div><div class="al-tag">EchoRoute</div><div class="al-name">Route each click to the highest-EPC merchant for that affiliate's audience</div></div>
+        <div class="al-right">Walmart, Amazon, Target — whichever converts best per creator per category. Real CVR data, not defaults.</div>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="arch-layer al-agent">
+        <div><div class="al-tag">EchoAgent</div><div class="al-name">Curate collages, shoppable posts & real-time audience engagement</div></div>
+        <div class="al-right">Content from signal data. Real-time Q&A — every answer links through Archer commissions.</div>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="arch-layer al-boost">
+        <div><div class="al-tag">EchoBoost</div><div class="al-name">Match top content + top payout → enable brand or affiliate-funded paid ads</div></div>
+        <div class="al-right">Meta, TikTok, beyond. Brands fund. Affiliates self-boost. Both earn through Archer commissions.</div>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="arch-layer al-archer">
+        <div><div class="al-tag">Archer</div><div class="al-name">Commission marketplace — 18% avg commissions, 2,500+ brand partners</div></div>
+        <div class="al-right">Every EchoTribe-routed click earns through Archer's seller network. Higher rates than standard Associates.</div>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="arch-layer al-shared">
+        <div><div class="al-tag">Shared</div><div class="al-name">AWIN global demand + attribution layer</div></div>
+        <div class="al-right">EchoBoost amplification draws on AWIN demand. Attribution confirmed through Archer's infrastructure.</div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="lg-item"><div class="lg-dot" style="background:var(--blue-mid)"></div>EchoSignal</div>
+      <div class="lg-item"><div class="lg-dot" style="background:var(--teal)"></div>EchoRoute</div>
+      <div class="lg-item"><div class="lg-dot" style="background:var(--purple)"></div>EchoAgent</div>
+      <div class="lg-item"><div class="lg-dot" style="background:var(--amber)"></div>EchoBoost</div>
+      <div class="lg-item"><div class="lg-dot" style="background:var(--green)"></div>Archer</div>
+    </div>
+  </div>
+
+  <!-- TWO AFFILIATE TYPES -->
+  <div class="section">
+    <div class="section-eyebrow">The Two Affiliate Types</div>
+    <div class="section-title">Built for creators. Built for publishers.</div>
+    <div class="section-sub">Archer's affiliate base spans social creators and traditional content publishers. The four-product loop applies to both — the signal detection, routing, and amplification logic is identical. Only the content output differs.</div>
+
+    <div class="aff-tabs">
+      <button class="aff-tab active" onclick="showAff('creator')">🛍️ Social Creator — Steph, Mommy & Me Collective</button>
+      <button class="aff-tab" onclick="showAff('publisher')">✈️ Content Publisher — She Buys Travel</button>
+    </div>
+
+    <!-- CREATOR -->
+    <div class="aff-pane active" id="aff-creator">
+      <div class="profile-box">
+        <div class="profile-avatar">🛍️</div>
+        <div class="profile-info">
+          <div class="profile-name">Steph — Mommy & Me Collective (@EverydaywithSteph)</div>
+          <div class="profile-type">Social creator · Deals & family · Facebook, Instagram, LTK · Amazon + Walmart affiliate</div>
+          <div class="profile-tags">
+            <span class="ptag"><strong>Niche:</strong> Toys, baby, household</span>
+            <span class="ptag"><strong>Walmart CVR:</strong> 16.7%</span>
+            <span class="ptag"><strong>Amazon YTD:</strong> $766K revenue, 52K units</span>
+            <span class="ptag"><strong>URLGenius:</strong> 1,347 links, 474K clicks</span>
+          </div>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="fs-line"></div><div class="fs-dot">📡</div>
+          <div class="fs-body">
+            <div class="fs-product fp-signal">EchoSignal</div>
+            <div class="fs-title">A clearance toy post on Facebook shows an organic spike at 6am</div>
+            <div class="fs-desc">EchoSignal detects click velocity on Steph's overnight post is up 40% in 4 hours. Hot Score crosses the amplification threshold. <strong>The window is open before she wakes up.</strong></div>
+            <div class="fs-metric fm-blue">Amplification window flagged automatically</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-line"></div><div class="fs-dot">🔀</div>
+          <div class="fs-body">
+            <div class="fs-product fp-route">EchoRoute</div>
+            <div class="fs-title">Toys → Walmart. 16.7% CVR vs. 4.1% on Amazon for this audience.</div>
+            <div class="fs-desc">EchoRoute checks Steph's CVR data by retailer and category. Walmart wins by 4×. The link routes automatically. <strong>No action required from Steph. Every click earns at the right merchant.</strong></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-line"></div><div class="fs-dot">🤖</div>
+          <div class="fs-body">
+            <div class="fs-product fp-agent">EchoAgent</div>
+            <div class="fs-title">Top 5 toys this week — collage generated, ready to post</div>
+            <div class="fs-desc">EchoAgent curates a shoppable collage from EchoSignal's top-ranked products, caption written in Steph's voice. <strong>Content creation time: zero. Every product links through EchoRoute to the right merchant.</strong></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-dot">🚀</div>
+          <div class="fs-body">
+            <div class="fs-product fp-boost">EchoBoost</div>
+            <div class="fs-title">$17.5K in ads → $3.5M in attributed sales → $128K commissions</div>
+            <div class="fs-desc">EchoBoost fires a Meta campaign using AWIN demand budget on the flagged post. The same content that earned $180 organically generates $128K in affiliate commissions. <strong>This is a real Q4 2025 result — not a projection.</strong> Same formula, repeatable across every creator in Archer's network.</div>
+            <div class="fs-metric fm-green">Verified Q4 2025: 200× ROAS on affiliate commissions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUBLISHER -->
+    <div class="aff-pane" id="aff-publisher">
+      <div class="profile-box">
+        <div class="profile-avatar">✈️</div>
+        <div class="profile-info">
+          <div class="profile-name">She Buys Travel — shebuystravel.com</div>
+          <div class="profile-type">Content publisher · Family travel · SEO-driven affiliate site · Amazon Associates (tag: travmom07-20)</div>
+          <div class="profile-tags">
+            <span class="ptag"><strong>Niche:</strong> Family travel, beach, Disney, gear</span>
+            <span class="ptag"><strong>Model:</strong> SEO articles with embedded Amazon affiliate links</span>
+            <span class="ptag"><strong>Gap:</strong> No visibility into which products actually convert</span>
+            <span class="ptag"><strong>Gap:</strong> Every link defaults to Amazon regardless of EPC</span>
+          </div>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="fs-line"></div><div class="fs-dot">📡</div>
+          <div class="fs-body">
+            <div class="fs-product fp-signal">EchoSignal</div>
+            <div class="fs-title">"Family Beach Games" — currently #2 trending article, updated March 17</div>
+            <div class="fs-desc">EchoSignal scans She Buys Travel's affiliate link performance across all articles. The beach games roundup — 15+ embedded Amazon links including Spikeball, KanJam, Bocce Ball — is seeing a seasonal traffic surge as summer approaches. <strong>This article is earning passive commissions right now, but no one is watching it or amplifying it.</strong> EchoSignal flags it as a live opportunity.</div>
+            <div class="fs-metric fm-blue">Summer seasonality window — 8 weeks out, traffic climbing</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-line"></div><div class="fs-dot">🔀</div>
+          <div class="fs-body">
+            <div class="fs-product fp-route">EchoRoute</div>
+            <div class="fs-title">Which products pay more on Walmart or direct — without changing the article?</div>
+            <div class="fs-desc">Right now every product in the article defaults to Amazon (tag: travmom07-20). EchoRoute analyzes EPC by product by merchant. Spikeball may earn better on Walmart. KanJam may earn better direct. Bocce Ball stays Amazon. <strong>EchoRoute replaces the static default with the highest-paying destination per click — transparently, behind the link, without touching the article.</strong></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-line"></div><div class="fs-dot">🤖</div>
+          <div class="fs-body">
+            <div class="fs-product fp-agent">EchoAgent</div>
+            <div class="fs-title">Top 5 beach games collage — embeddable in article or shareable on social</div>
+            <div class="fs-desc">EchoAgent pulls the top-EPC products from the article, curates a shoppable collage and caption, ready for She Buys Travel's Instagram, Pinterest, or Facebook. <strong>The article that only earned on search now earns on social too.</strong> EchoAgent also handles reader comments in real time — "which beach game is best for a 4-year-old?" — with affiliate-linked answers.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-dot">🚀</div>
+          <div class="fs-body">
+            <div class="fs-product fp-boost">EchoBoost</div>
+            <div class="fs-title">Summer is 8 weeks out. A beach gear brand in Archer's network can fund this now.</div>
+            <div class="fs-desc">EchoBoost takes the signal (article trending + summer seasonality), the routing (highest-EPC products identified), and the EchoAgent collage — and builds a paid ad ready to run on Meta or TikTok. A brand like Spikeball or a beach gear seller in Archer's network funds the campaign. <strong>She Buys Travel earns the affiliate commission on every resulting sale at Archer's 18% rate, not Amazon's standard 3%.</strong> The article that earned $40/month now earns $400.</div>
+            <div class="fs-metric fm-green">Article lifespan extended — seasonal peak fully monetized</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROOF -->
+  <div class="section">
+    <div class="section-eyebrow">The Proof of Concept</div>
+    <div class="section-title">One creator. Seven months. All real data.</div>
+    <div class="section-sub">The creator use case above is not hypothetical. Every number below is verified against Impact (Walmart), Amazon Associates, and Meta Ads Manager from a Q4 2025 single-creator test.</div>
+
+    <div class="proof-grid">
+      <div class="proof-card"><div class="pcard-num">$1.75M</div><div class="pcard-label">Walmart GMV attributed</div><div class="pcard-sub">Via Impact, single creator, verified</div></div>
+      <div class="proof-card"><div class="pcard-num">16.7%</div><div class="pcard-label">Walmart CVR — deals audience</div><div class="pcard-sub">8× better than Target, same audience</div></div>
+      <div class="proof-card"><div class="pcard-num">$766K</div><div class="pcard-label">Amazon YTD revenue</div><div class="pcard-sub">52,585 units shipped</div></div>
+      <div class="proof-card"><div class="pcard-num">$128K</div><div class="pcard-label">Commissions — one EchoBoost test</div><div class="pcard-sub">45-day Q4 campaign</div></div>
+      <div class="proof-card"><div class="pcard-num">$17.5K</div><div class="pcard-label">Ad spend in test</div><div class="pcard-sub">→ $3.5M in attributed sales</div></div>
+      <div class="proof-card"><div class="pcard-num">200×</div><div class="pcard-label">Return on ad spend</div><div class="pcard-sub">Commissions vs. ad spend</div></div>
+    </div>
+
+    <div class="case-box">
+      <div class="cb-label">EchoBoost in action — Q4 2025 verified result</div>
+      <div class="cb-flow">
+        <div class="cb-node"><div class="cb-num">$17.5K</div><div class="cb-lbl">Ad spend</div></div>
+        <div class="cb-arrow">→</div>
+        <div class="cb-node"><div class="cb-num">$3.5M</div><div class="cb-lbl">Attributed sales</div></div>
+        <div class="cb-arrow">→</div>
+        <div class="cb-result"><div class="cb-num">$128K</div><div class="cb-lbl">Affiliate commissions</div></div>
+      </div>
+      <div class="cb-note">No new creative. No new products. <strong>EchoSignal flagged the right post. EchoBoost fired the spend at the right moment. EchoRoute sent clicks to the highest-converting retailer.</strong> That formula is repeatable across every affiliate in Archer's network — creators and publishers alike.</div>
+    </div>
+  </div>
+
+  <!-- PLATFORM OPTIONALITY -->
+  <div class="section">
+    <div class="section-eyebrow">Deployment Options</div>
+    <div class="section-title">Inside Archer — or as a stand-alone layer above it.</div>
+    <div class="section-sub">EchoTribe is designed to work in two configurations. Full integration inside Archer is the preferred path. But the architecture also supports operating across multiple affiliate networks simultaneously — with Archer as the primary preferred partner.</div>
+
+    <div class="option-grid">
+      <div class="option-card preferred">
+        <div class="option-head">
+          <div class="oh-eyebrow">Configuration 1 — Preferred</div>
+          <div class="oh-title">EchoTribe lives inside Archer</div>
+          <div class="oh-badge badge-pref">Preferred path</div>
+        </div>
+        <div class="option-body">
+          <div class="option-desc">EchoTribe's four products are built into Archer's platform. Every Archer affiliate — creator or publisher — gets EchoSignal monitoring, EchoRoute smart links, EchoAgent content tools, and EchoBoost amplification. Brands in Archer's seller network fund EchoBoost campaigns. Archer owns the intelligence layer as a product moat.</div>
+          <div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Archer's moat:</strong> Only affiliate network with AI signal detection + paid amplification built in</div></div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Brand budget unlocked:</strong> Sellers fund EchoBoost campaigns — new revenue surface inside Archer</div></div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Series A narrative:</strong> "AI-powered affiliate intelligence" — not just a commission marketplace</div></div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Requires:</strong> Archer expansion to include Walmart brands alongside Amazon sellers</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-head">
+          <div class="oh-eyebrow">Configuration 2 — Parallel</div>
+          <div class="oh-title">EchoTribe as a network-agnostic layer</div>
+          <div class="oh-badge badge-alt">Alternative path</div>
+        </div>
+        <div class="option-body">
+          <div class="option-desc">EchoTribe operates above multiple affiliate networks — Archer, AWIN, Impact, and others. EchoRoute selects the best-paying network per product per click. Archer remains a primary network partner with preferential routing. EchoTribe serves affiliates across multiple networks including GoLikely (2,000+ international creators).</div>
+          <div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Multi-network EPC optimization:</strong> EchoRoute selects Archer when it pays best — and it often will</div></div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Broader reach:</strong> EchoTribe serves creator networks beyond Archer's current affiliate base</div></div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Archer benefit:</strong> Gets preferential EchoRoute traffic without owning the layer exclusively</div></div>
+            <div class="ol-item"><div class="ol-arrow">→</div><div><strong>Requires:</strong> Revenue share or licensing agreement — Archer as a preferred network partner</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="walmart-bar">
+      <div class="wb-label">The Walmart opportunity — worth naming directly</div>
+      <div class="wb-text">Levanta has started onboarding Walmart brands alongside Amazon sellers. <strong>Archer needs to move on this.</strong> EchoTribe's proof of concept ran entirely on Walmart — $1.75M GMV, 16.7% CVR on deals audiences — and the routing data shows Walmart outperforms Amazon by 4× for that affiliate type. Adding Walmart sellers to Archer's commission marketplace is the single move that most expands the platform's TAM and directly strengthens the EchoRoute story for every publisher and creator in the network.</div>
+    </div>
+  </div>
+
+  <!-- DEAL PATHS -->
+  <div class="section">
+    <div class="section-eyebrow">How We Structure It</div>
+    <div class="section-title">Three paths forward — in order of preference.</div>
+    <div class="section-sub">The structure is flexible. What isn't: EchoTribe's intelligence layer belongs inside a platform with real affiliate distribution. Archer has that. Here's how we get there.</div>
+
+    <div class="deal-list">
+      <div class="deal-card preferred">
+        <div class="deal-head">
+          <div><div class="dh-path">Path 1 — Preferred</div><div class="dh-name">Acqui-hire with equity</div></div>
+          <div class="dh-badge db-blue">Preferred</div>
+        </div>
+        <div class="deal-body">
+          <div class="deal-desc">Kelly joins Archer as Head of Creator Commerce Intelligence with equity. EchoTribe IP — EchoSignal, EchoRoute, EchoAgent, EchoBoost — transfers to Archer. The combined company raises Series A on a materially stronger narrative: the first affiliate network with an AI intelligence layer, a paid amplification playbook with documented 200× ROAS, and multi-retailer routing proven at $1.75M Walmart GMV.</div>
+          <div class="deal-terms">
+            <div class="dt-row"><div class="dt-label">Kelly gets</div><div class="dt-val"><strong>Equity in Archer</strong> — named product lane owner, Head of Creator Commerce Intelligence</div></div>
+            <div class="dt-row"><div class="dt-label">Archer gets</div><div class="dt-val"><strong>Full EchoTribe IP</strong> — four products, creator relationships, paid amplification playbook, 7 months of real affiliate performance data</div></div>
+            <div class="dt-row"><div class="dt-label">Timing</div><div class="dt-val">Pre-Series A — equity is the currency, not cash. The acquisition changes the fundraising story.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-head">
+          <div><div class="dh-path">Path 2 — Alternate</div><div class="dh-name">Co-raise — pitch investors together</div></div>
+          <div class="dh-badge db-gray">Alternate</div>
+        </div>
+        <div class="deal-body">
+          <div class="deal-desc">If a formal acquisition is premature before the next raise, we pitch investors together with the combined narrative: Archer's seller network + EchoTribe's intelligence layer + a verified 200× ROAS case study. Kelly receives equity in the raise in exchange for EchoTribe IP and creator relationships. No structural merger required upfront.</div>
+          <div class="deal-terms">
+            <div class="dt-row"><div class="dt-label">Kelly gets</div><div class="dt-val"><strong>Equity stake from the raise</strong> — in exchange for IP transfer and creator relationships</div></div>
+            <div class="dt-row"><div class="dt-label">Archer gets</div><div class="dt-val"><strong>A stronger Series A story</strong> — AI-powered affiliate intelligence with documented ROAS</div></div>
+            <div class="dt-row"><div class="dt-label">Timing</div><div class="dt-val">Joint investor pitch within 60 days of agreeing to this path</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-head">
+          <div><div class="dh-path">Path 3 — With conditions</div><div class="dh-name">Revenue share partnership with acquisition milestone</div></div>
+          <div class="dh-badge db-gray">With conditions</div>
+        </div>
+        <div class="deal-body">
+          <div class="deal-desc">EchoTribe deploys inside Archer on a revenue share basis — acceptable only with a written acquisition trigger. If EchoBoost campaigns drive a defined GMV threshold within 45 days, we move to acquisition discussions at Series A. The milestone makes this a stepping stone, not a permanent arrangement.</div>
+          <div class="deal-terms">
+            <div class="dt-row"><div class="dt-label">Kelly gets</div><div class="dt-val"><strong>Rev share + written acquisition trigger</strong> — specific milestone, legally documented</div></div>
+            <div class="dt-row"><div class="dt-label">Archer gets</div><div class="dt-val"><strong>EchoBoost deployed immediately</strong> — brand budget amplification, smart routing, zero new infrastructure</div></div>
+            <div class="dt-row"><div class="dt-label">Condition</div><div class="dt-val"><strong>Written milestone required</strong> — not an informal "let's revisit at Series A"</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="position-bar">
+    <div class="pb-eyebrow">The combined position</div>
+    <div class="pb-text">Archer already built what's hardest to build — <em>the seller network, the commission infrastructure, the AWIN demand layer.</em> EchoTribe built the intelligence layer above it: signal detection across every affiliate, smart retailer routing, AI content creation, and a paid amplification playbook with a 200× ROAS case study behind it. Together, the platform tells any affiliate — creator or publisher — exactly which product to amplify, which merchant to route to, and what it will earn. Before they press publish.</div>
+    <div class="pb-sub">That's not a feature. That's a new category: AI-powered affiliate network intelligence. Neither company gets there alone.</div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">Archer <span>× EchoTribe</span></div>
+    <div class="footer-note">Confidential · March 2026 · Kelly Hagen</div>
+  </div>
+
+</div>
+<script>
+function showAff(id) {
+  document.querySelectorAll('.aff-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.aff-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('aff-' + id).classList.add('active');
+  document.querySelector('[onclick="showAff(\'' + id + '\')"]').classList.add('active');
+}
+</script>
+</body>
+</html>
