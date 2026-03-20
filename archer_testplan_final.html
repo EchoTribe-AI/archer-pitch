@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EchoBoost × Archer — Phase 1 Test Plan</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #fafaf8; --bg2: #f2f2ef; --surface: #fff; --surface2: #f0f0ed;
+    --text: #1a1a17; --text2: #3c3c38; --text3: #606058; --text4: #999890;
+    --border: rgba(0,0,0,0.09); --border2: rgba(0,0,0,0.16);
+    --blue: #1c5fa6; --blue-mid: #2e7dd4; --blue-light: #e8f2fc; --blue-text: #0f4a8a;
+    --green: #27693a; --green-light: #e6f4eb;
+    --amber: #8a5510; --amber-light: #fbeedd;
+    --red: #a02828; --red-light: #fbe9e9;
+    --teal: #0a6b52; --teal-light: #e2f5ee;
+    --r: 8px; --rlg: 12px;
+    --serif: 'Georgia', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --mono: 'SF Mono', 'Fira Mono', monospace;
+  }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .shell { max-width: 880px; margin: 0 auto; padding: 0 28px 80px; }
+
+  /* HEADER */
+  .header { padding: 52px 0 40px; border-bottom: 0.5px solid var(--border2); margin-bottom: 52px; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 12px; }
+  .page-title { font-family: var(--serif); font-size: 34px; font-weight: 400; color: var(--text); line-height: 1.15; letter-spacing: -0.4px; margin-bottom: 14px; }
+  .page-title em { color: var(--blue-mid); font-style: normal; }
+  .page-sub { font-size: 14px; color: var(--text3); max-width: 600px; line-height: 1.75; margin-bottom: 22px; }
+  .header-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hmeta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.8px; padding: 3px 11px; border-radius: 20px; border: 0.5px solid; }
+  .hm-blue { color: var(--blue); border-color: var(--blue); background: var(--blue-light); }
+  .hm-green { color: var(--green); border-color: var(--green); background: var(--green-light); }
+  .hm-gray { color: var(--text4); border-color: var(--border2); background: var(--surface2); }
+  .hm-amber { color: var(--amber); border-color: var(--amber); background: var(--amber-light); }
+
+  /* VIEW TOGGLE */
+    /* SECTIONS */
+  .section { margin-bottom: 60px; }
+  .section-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 7px; }
+  .section-title { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--text); margin-bottom: 7px; line-height: 1.25; }
+  .section-sub { font-size: 13px; color: var(--text3); margin-bottom: 24px; line-height: 1.7; max-width: 660px; }
+
+  /* WHAT WE EACH BRING */
+  .brings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+  .brings-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); overflow: hidden; }
+  .bc-head { padding: 12px 16px; border-bottom: 0.5px solid var(--border); background: var(--surface2); }
+  .bc-label { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .bcl-archer { color: var(--green); }
+  .bcl-echo { color: var(--blue-mid); }
+  .bc-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .bc-body { padding: 12px 16px; }
+  .bc-item { font-size: 12px; color: var(--text2); padding: 5px 0; border-bottom: 0.5px solid var(--border); display: flex; gap: 8px; line-height: 1.5; }
+  .bc-item:last-child { border-bottom: none; }
+  .bc-item strong { color: var(--text); }
+
+  /* PRODUCT PLATFORM */
+  .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+  .platform-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); padding: 14px 16px; }
+  .pc-icon { font-size: 20px; margin-bottom: 8px; }
+  .pc-name { font-family: var(--mono); font-size: 10px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text4); margin-bottom: 5px; }
+  .pc-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .pc-desc { font-size: 12px; color: var(--text3); line-height: 1.55; }
+  .pc-status { font-family: var(--mono); font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-top: 8px; display: inline-block; }
+  .ps-built { background: var(--green-light); color: var(--green); border: 0.5px solid rgba(39,105,58,0.3); }
+  .ps-ready { background: var(--blue-light); color: var(--blue-text); border: 0.5px solid rgba(46,125,212,0.3); }
+
+  /* PHASES */
+  .phases { display: flex; flex-direction: column; gap: 0; }
+  .phase { display: grid; grid-template-columns: 100px 1fr; gap: 0 18px; position: relative; }
+  .phase:not(:last-child) .ph-line { position: absolute; left: 49px; top: 42px; bottom: -4px; width: 0.5px; background: linear-gradient(to bottom, var(--border2), transparent); }
+  .ph-badge { width: 100px; background: var(--surface); border: 0.5px solid var(--border2); border-radius: var(--r); padding: 10px 12px; text-align: center; flex-shrink: 0; position: relative; z-index: 1; align-self: start; margin-bottom: 2px; }
+  .ph-week { font-family: var(--mono); font-size: 10px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text4); margin-bottom: 2px; }
+  .ph-goal { font-size: 11px; font-weight: 500; color: var(--text2); line-height: 1.3; }
+  .ph-body { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); padding: 14px 16px; margin-bottom: 10px; }
+  .ph-status { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .phs-setup { color: var(--blue-mid); } .phs-test { color: var(--amber); } .phs-optimize { color: var(--teal); } .phs-scale { color: var(--green); }
+  .ph-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+  .ph-desc { font-size: 12.5px; color: var(--text2); line-height: 1.65; margin-bottom: 8px; }
+  .ph-desc strong { color: var(--text); }
+  .ph-tasks { display: flex; flex-direction: column; gap: 4px; }
+  .ph-task { font-size: 11.5px; color: var(--text3); display: flex; gap: 8px; line-height: 1.45; }
+  .pt-owner { font-family: var(--mono); font-size: 9px; padding: 1px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+  .pto-echo { background: var(--blue-light); color: var(--blue-text); }
+  .pto-archer { background: var(--green-light); color: var(--green); }
+  .pto-both { background: var(--teal-light); color: var(--teal); }
+  .ph-metric { display: inline-flex; font-family: var(--mono); font-size: 10px; padding: 2px 9px; border-radius: 20px; margin-top: 8px; }
+  .pm-blue { background: var(--blue-light); color: var(--blue-text); border: 0.5px solid rgba(46,125,212,0.3); }
+  .pm-green { background: var(--green-light); color: var(--green); border: 0.5px solid rgba(39,105,58,0.3); }
+  .pm-amber { background: var(--amber-light); color: var(--amber); border: 0.5px solid rgba(138,85,16,0.3); }
+
+  /* BUDGET TABLE */
+  .budget-table { width: 100%; border-collapse: collapse; border: 0.5px solid var(--border); border-radius: var(--rlg); overflow: hidden; margin-bottom: 12px; }
+  .budget-table th { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text4); padding: 10px 14px; text-align: left; background: var(--surface2); border-bottom: 0.5px solid var(--border2); }
+  .budget-table td { padding: 11px 14px; font-size: 12.5px; color: var(--text2); border-bottom: 0.5px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .budget-table tr:last-child td { border-bottom: none; }
+  .budget-table td:first-child { font-weight: 500; color: var(--text); }
+  .budget-table tr.total td { background: var(--surface2); font-weight: 500; color: var(--text); border-top: 0.5px solid var(--border2); }
+  .num { font-family: var(--mono); font-weight: 500; }
+  .num-green { color: var(--green); } .num-amber { color: var(--amber); } .num-blue { color: var(--blue-mid); }
+
+  /* SPLIT */
+  .split-box { background: var(--surface2); border: 0.5px solid var(--border2); border-radius: var(--rlg); padding: 18px 20px; margin-bottom: 12px; }
+  .split-label { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--text4); margin-bottom: 12px; }
+  .split-row { display: flex; gap: 0; border: 0.5px solid var(--border2); border-radius: var(--r); overflow: hidden; margin-bottom: 10px; }
+  .split-part { flex: 1; padding: 12px 14px; text-align: center; }
+  .split-part.archer { background: var(--green-light); border-right: 0.5px solid rgba(39,105,58,0.2); }
+  .split-part.echo { background: var(--blue-light); border-right: 0.5px solid rgba(46,125,212,0.2); }
+  .split-part.steph { background: var(--amber-light); }
+  .sp-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 5px; }
+  .sp-label.archer { color: var(--green); } .sp-label.echo { color: var(--blue-text); } .sp-label.steph { color: var(--amber); }
+  .sp-pct { font-family: var(--mono); font-size: 20px; font-weight: 500; line-height: 1; margin-bottom: 4px; }
+  .sp-brings { font-size: 11px; color: var(--text3); line-height: 1.45; }
+  .split-note { font-size: 12px; color: var(--text3); line-height: 1.65; }
+  .split-note strong { color: var(--text2); }
+
+  /* ATTRIBUTION */
+  .tech-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--rlg); padding: 16px 18px; margin-bottom: 10px; }
+  .tech-label { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--text4); margin-bottom: 12px; }
+  .tech-row { display: flex; gap: 12px; padding: 7px 0; border-bottom: 0.5px solid var(--border); align-items: flex-start; font-size: 12.5px; }
+  .tech-row:last-child { border-bottom: none; }
+  .tech-step { font-family: var(--mono); font-size: 10px; color: var(--blue-mid); min-width: 60px; flex-shrink: 0; margin-top: 1px; }
+  .tech-desc { color: var(--text2); line-height: 1.55; }
+  .tech-desc strong { color: var(--text); }
+
+  /* NEXT STEPS */
+  .next-list { display: flex; flex-direction: column; gap: 8px; }
+  .next-item { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); padding: 12px 16px; display: flex; gap: 12px; }
+  .ni-owner { font-family: var(--mono); font-size: 9px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; letter-spacing: 0.5px; }
+  .ni-echo { background: var(--blue-light); color: var(--blue-text); }
+  .ni-archer { background: var(--green-light); color: var(--green); }
+  .ni-both { background: var(--teal-light); color: var(--teal); }
+  .ni-action { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .ni-note { font-size: 11.5px; color: var(--text3); line-height: 1.5; }
+
+  /* POSITION BAR */
+  .position-bar { background: var(--text); border-radius: var(--rlg); padding: 24px 28px; margin-bottom: 16px; }
+  .pb-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
+  .pb-text { font-size: 16px; color: #fff; line-height: 1.65; font-family: var(--serif); font-weight: 400; }
+  .pb-text em { color: #78b4f0; font-style: normal; }
+
+              /* FOOTER */
+  .footer { border-top: 0.5px solid var(--border); padding-top: 22px; margin-top: 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-brand { font-size: 13px; color: var(--text4); }
+  .footer-brand span { color: var(--blue-mid); }
+  .footer-note { font-family: var(--mono); font-size: 10px; color: var(--text4); }
+
+  @media (max-width: 640px) {
+    .brings-grid, .risk-grid, .platform-grid, .split-row { grid-template-columns: 1fr; }
+    .split-row { flex-direction: column; }
+    .split-part.archer { border-right: none; border-bottom: 0.5px solid rgba(39,105,58,0.2); }
+    .split-part.echo { border-right: none; border-bottom: 0.5px solid rgba(46,125,212,0.2); }
+    .phase { grid-template-columns: 80px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">EchoBoost × Archer Affiliates</div>
+    <div class="page-title">The <em>Phase 1 test plan.</em></div>
+    <div class="page-sub">What we're building, how we're running the first test, what each side brings, and what success looks like. Target launch: April 1, 2026.</div>
+    <div class="header-meta">
+      <div class="hmeta hm-blue">Kelly Hagen / EchoTribe</div>
+      <div class="hmeta hm-green">Archer Affiliates</div>
+      <div class="hmeta hm-amber">Target: April 1, 2026</div>
+      <div class="hmeta hm-gray">Updated March 2026</div>
+    </div>
+  </div>
+
+  
+
+<div>
+
+    <!-- WHAT WE AGREED -->
+    <div class="section">
+      <div class="section-eyebrow">The Agreement</div>
+      <div class="section-title">What we're doing together</div>
+      <div class="section-sub">Three things agreed on the call that frame everything below.</div>
+
+      <div class="kelly-card" style="border-left-color:var(--green);margin-bottom:10px;">
+        <div class="kc-label" style="color:var(--green);">The model</div>
+        <div class="kc-text"><strong>EchoBoost runs paid amplification on Steph's existing content against Archer brand products.</strong> Archer deploys brand budget. EchoTribe runs the playbook. Steph provides her page, audience, and ad account. Commissions land in Archer's attribution account. Profit splits after ad spend: Steph 30% / Archer 35% / EchoTribe 35%.</div>
+      </div>
+
+      <div class="kelly-card" style="border-left-color:var(--blue-mid);margin-bottom:10px;">
+        <div class="kc-label" style="color:var(--blue-mid);">The creator</div>
+        <div class="kc-text"><strong>Steph (@EverydaywithSteph / Mommy & Me Collective)</strong> — deals and family creator across Facebook, Instagram, and LTK. $766K Amazon YTD, $1.75M Walmart GMV, 16.7% Walmart CVR. 474K URLGenius clicks across 1,347 affiliate links. Her audience is the most valuable asset in this test. She contributes her page and ad account — zero budget at risk for her.</div>
+      </div>
+
+      <div class="kelly-card" style="border-left-color:var(--amber);margin-bottom:0;">
+        <div class="kc-label" style="color:var(--amber);">The brand tool vision</div>
+        <div class="kc-text">David flagged this on the call: <strong>brands plug in their existing creator contracts, creators authorize the platform, brand clicks a button — EchoBoost fires automatically.</strong> This is the Phase 2 product direction. Phase 1 is the proof of concept that makes that pitch credible.</div>
+      </div>
+    </div>
+
+    <!-- WHAT'S BEEN BUILT -->
+    <div class="section">
+      <div class="section-eyebrow">What's Been Built</div>
+      <div class="section-title">The EchoBoost platform — live now</div>
+      <div class="section-sub">Three modules already built and running on top of the Archer API. This is the infrastructure that runs the test — not a prototype, a working system.</div>
+
+      <div class="platform-grid">
+        <div class="platform-card">
+          <div class="pc-icon">🔍</div>
+          <div class="pc-name">Module 2a</div>
+          <div class="pc-title">Archer Product Search</div>
+          <div class="pc-desc">Search and browse the full 113K Archer catalog. Steph's 217 matched ASINs pre-loaded at top. Filters by category, commission rate, rating. Generates live Archer attribution links on click. Copies to clipboard.</div>
+          <div class="pc-status ps-built">Built · /archer/products</div>
+        </div>
+        <div class="platform-card">
+          <div class="pc-icon">🛍️</div>
+          <div class="pc-name">Module 2b</div>
+          <div class="pc-title">Collage Landing Pages</div>
+          <div class="pc-desc">Build shoppable product collages with theme + layout picker. Claude generates captions in Steph's voice. Dynamic landing pages served at /shop/{slug}. Facebook Pixel fires on page load + product clicks. Captures fbclid for Meta attribution.</div>
+          <div class="pc-status ps-built">Built · /archer/collage</div>
+        </div>
+        <div class="platform-card">
+          <div class="pc-icon">🚀</div>
+          <div class="pc-name">Module 2c</div>
+          <div class="pc-title">Ads Builder</div>
+          <div class="pc-desc">4-step campaign builder: campaign type (organic first or straight to ads), product selection, Claude-generated ad copy in 3 variants with unique attribution URLs per variant, KPI forecast with profit split, export package for Meta Ads Manager.</div>
+          <div class="pc-status ps-ready">In progress · /archer/ads</div>
+        </div>
+      </div>
+
+      <div class="brings-grid" style="margin-top:16px;">
+        <div class="brings-card">
+          <div class="bc-head"><div class="bc-label bcl-archer">Archer brings</div><div class="bc-title">The network + the budget</div></div>
+          <div class="bc-body">
+            <div class="bc-item"><span>→</span><div><strong>Brand budget</strong> — funds EchoBoost test campaigns</div></div>
+            <div class="bc-item"><span>→</span><div><strong>Archer API</strong> — 113K products, live attribution link generation, 14-day cookie, reporting via /insights</div></div>
+            <div class="bc-item"><span>→</span><div><strong>Commission infrastructure</strong> — 18% avg rate, Amazon Attribution tracking</div></div>
+            <div class="bc-item"><span>→</span><div><strong>BD team</strong> — can recruit additional brands and creators for scale</div></div>
+            <div class="bc-item"><span>→</span><div><strong>SOW / agreement</strong> — Juda drafting</div></div>
+          </div>
+        </div>
+        <div class="brings-card">
+          <div class="bc-head"><div class="bc-label bcl-echo">EchoTribe brings</div><div class="bc-title">The playbook + the platform</div></div>
+          <div class="bc-body">
+            <div class="bc-item"><span>→</span><div><strong>Steph's data</strong> — 217 matched ASINs, 3 months of Amazon performance data cross-referenced with Archer catalog</div></div>
+            <div class="bc-item"><span>→</span><div><strong>EchoBoost platform</strong> — product search, collage builder, ads builder, landing pages, click tracking — all live</div></div>
+            <div class="bc-item"><span>→</span><div><strong>Paid amplification playbook</strong> — same formula that generated $128K in commissions on $17.5K spend in Q4</div></div>
+            <div class="bc-item"><span>→</span><div><strong>Steph's page + ad account</strong> — organic posting and paid boosting from her Facebook audience</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW THE TEST RUNS -->
+    <div class="section">
+      <div class="section-eyebrow">How the Test Runs</div>
+      <div class="section-title">Two test types — both running simultaneously</div>
+      <div class="section-sub">We'll run both campaign types in parallel so we can compare performance directly.</div>
+
+      <div class="brings-grid" style="margin-bottom:16px;">
+        <div class="brings-card">
+          <div class="bc-head"><div class="bc-label" style="color:var(--teal);">Test Type A</div><div class="bc-title">🌱 Organic First</div></div>
+          <div class="bc-body">
+            <div class="bc-item"><span>1.</span><div>EchoTribe builds post using EchoAgent for top matched Archer products</div></div>
+            <div class="bc-item"><span>2.</span><div>Steph approves and posts organically to her Facebook page</div></div>
+            <div class="bc-item"><span>3.</span><div>EchoSignal monitors for 48–72hrs — click velocity, engagement signals</div></div>
+            <div class="bc-item"><span>4.</span><div>Top performers trigger EchoBoost — paid campaign fires on the already-converting post</div></div>
+            <div class="bc-item"><span>5.</span><div><strong>Lower risk.</strong> Only spend on content already proven to convert organically.</div></div>
+          </div>
+        </div>
+        <div class="brings-card">
+          <div class="bc-head"><div class="bc-label" style="color:var(--amber);">Test Type B</div><div class="bc-title">🚀 Straight to Ads</div></div>
+          <div class="bc-body">
+            <div class="bc-item"><span>1.</span><div>EchoTribe identifies top Archer products by commission rate × Steph audience fit</div></div>
+            <div class="bc-item"><span>2.</span><div>Builds shoppable landing page + 3 ad copy variants with unique attribution URLs</div></div>
+            <div class="bc-item"><span>3.</span><div>Campaign goes directly into Meta — no organic warm-up period</div></div>
+            <div class="bc-item"><span>4.</span><div>Test landing page vs. direct to Amazon as a split variable</div></div>
+            <div class="bc-item"><span>5.</span><div><strong>Faster signal.</strong> Day 3 data tells us which products and creative work.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATTRIBUTION -->
+    <div class="section">
+      <div class="section-eyebrow">Attribution</div>
+      <div class="section-title">How we track every click and sale</div>
+
+      <div class="tech-box">
+        <div class="tech-label">The click flow — Meta ad → Amazon purchase</div>
+        <div class="tech-row"><div class="tech-step">Step 1</div><div class="tech-desc"><strong>Meta ad fires</strong> — user sees boosted post, clicks. Facebook click ID (fbclid) captured in URL.</div></div>
+        <div class="tech-row"><div class="tech-step">Step 2</div><div class="tech-desc"><strong>Landing page</strong> — user lands on shoppable Mommy & Me page. fbclid stored. Facebook Pixel fires PageView + ViewContent. First-party data captured.</div></div>
+        <div class="tech-row"><div class="tech-step">Step 3</div><div class="tech-desc"><strong>Product click</strong> — user clicks Shop Now → Archer attribution link fires → routes to Amazon. 14-day cookie set.</div></div>
+        <div class="tech-row"><div class="tech-step">Step 4</div><div class="tech-desc"><strong>Purchase</strong> — any purchase of the Archer brand product within 14 days attributed. Commission lands in Archer's account.</div></div>
+        <div class="tech-row"><div class="tech-step">Step 5</div><div class="tech-desc"><strong>Reporting</strong> — Archer's /insights API returns clicks, conversions, new-to-brand purchases, brand halo sales, and add-to-cart data per ASIN per campaign label. Weekly report generated automatically.</div></div>
+      </div>
+
+      <div style="font-size:12px;color:var(--text3);line-height:1.65;padding:10px 14px;background:var(--bg2);border-radius:var(--r);">
+        <strong style="color:var(--text2);">Important:</strong> Each ad variant gets a unique Archer attribution link with a distinct campaign label (e.g. <span style="font-family:var(--mono);font-size:11px;">steph-apr1-var-a</span>). This enables split testing performance by creative, by routing (landing page vs. direct), and by product — all trackable separately in Archer's reporting.
+      </div>
+    </div>
+
+    <!-- BUDGET -->
+    <div class="section">
+      <div class="section-eyebrow">Budget & Timeline</div>
+      <div class="section-title">Conservative expectations — week by week</div>
+      <div class="section-sub">Modeled at ~30% of the Q4 Walmart test pace to be conservative on a cold Amazon start. If early signals are strong, numbers move up.</div>
+
+      <table class="budget-table">
+        <tr><th>Phase</th><th>Weekly spend</th><th>Target commissions</th><th>Goal</th><th>Notes</th></tr>
+        <tr>
+          <td>Weeks 1–2 — Signal</td>
+          <td><span class="num num-blue">$500–1K/wk</span></td>
+          <td><span class="num">$400–800</span></td>
+          <td>Find signal</td>
+          <td>Not profitable yet — expected. Pause underperformers at day 3.</td>
+        </tr>
+        <tr>
+          <td>Weeks 3–4 — Optimize</td>
+          <td><span class="num num-amber">$1–2K/wk</span></td>
+          <td><span class="num">$1.2–2.5K</span></td>
+          <td>Approach break-even</td>
+          <td>Scale winners. Add 2nd creator if BD has recruited one.</td>
+        </tr>
+        <tr>
+          <td>Weeks 5–8 — Scale</td>
+          <td><span class="num num-green">$2–4K/wk</span></td>
+          <td><span class="num num-green">$3–6K+</span></td>
+          <td>Break-even → profit</td>
+          <td>Optimized campaigns, 2+ creators. Profit split begins.</td>
+        </tr>
+        <tr class="total">
+          <td>Phase 1 total</td>
+          <td><span class="num">~$16–28K</span></td>
+          <td><span class="num num-green">$20–38K+</span></td>
+          <td>Profitable by week 8</td>
+          <td>Brand budget — not Archer's capital.</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- PROFIT SPLIT -->
+    <div class="section">
+      <div class="section-eyebrow">Revenue Model</div>
+      <div class="section-title">How we split the upside</div>
+
+      <div class="split-box">
+        <div class="split-label">Profit split — commissions earned during campaign period</div>
+        <div class="split-row">
+          <div class="split-part steph">
+            <div class="sp-label steph">Steph</div>
+            <div class="sp-pct" style="color:var(--amber);">30%</div>
+            <div class="sp-brings">Page, audience, ad account access, content approval</div>
+          </div>
+          <div class="split-part archer">
+            <div class="sp-label archer">Archer</div>
+            <div class="sp-pct" style="color:var(--green);">35%</div>
+            <div class="sp-brings">Brand budget deployment, affiliate infrastructure, commission collection</div>
+          </div>
+          <div class="split-part echo">
+            <div class="sp-label echo">EchoTribe</div>
+            <div class="sp-pct" style="color:var(--blue-mid);">35%</div>
+            <div class="sp-brings">Post creation, campaign management, platform, full playbook</div>
+          </div>
+        </div>
+        <div class="split-note"><strong>Brand budget is separate</strong> — funded by Archer's brand partners, not deducted from the split. Every dollar of commissions earned is pure profit to split from day one. Brands earn back through sales velocity, new customer acquisition, and brand awareness on Amazon.</div>
+      </div>
+    </div>
+
+    <!-- NEXT STEPS -->
+    <div class="section">
+      <div class="section-eyebrow">Immediate Next Steps</div>
+      <div class="section-title">What happens this week</div>
+
+      <div class="next-list">
+        <div class="next-item">
+          <div class="ni-owner ni-archer">Archer</div>
+          <div><div class="ni-action">Juda drafts and sends SOW / partnership agreement</div><div class="ni-note">Covers: budget authorization, profit split terms (30/35/35), creator authorization, campaign approval process, reporting cadence.</div></div>
+        </div>
+        <div class="next-item">
+          <div class="ni-owner ni-echo">EchoTribe</div>
+          <div><div class="ni-action">Deliver product shortlist — top Archer products for Steph's audience</div><div class="ni-note">217 matched ASINs already cross-referenced. Will identify top 10–15 by Steph revenue + Archer commission rate. Share with Archer for brand outreach if any aren't already in the network.</div></div>
+        </div>
+        <div class="next-item">
+          <div class="ni-owner ni-archer">Archer</div>
+          <div><div class="ni-action">Brand outreach — confirm which brands want to fund EchoBoost campaigns</div><div class="ni-note">BD team reaches out to brands on the shortlist. EchoTribe needs: confirmed brand KPIs, approved budget per brand, and content approval process.</div></div>
+        </div>
+        <div class="next-item">
+          <div class="ni-owner ni-both">Both</div>
+          <div><div class="ni-action">SOW signed — campaigns authorized to launch</div><div class="ni-note">Target: signed before April 1 so first campaigns go live on schedule.</div></div>
+        </div>
+        <div class="next-item">
+          <div class="ni-owner ni-echo">EchoTribe</div>
+          <div><div class="ni-action">First posts built + landing pages live — ready for Steph approval</div><div class="ni-note">Using Module 2a (product selection) → Module 2b (collage/landing page) → Module 2c (ads builder). Steph approves all content before anything posts or goes live in Meta.</div></div>
+        </div>
+        <div class="next-item">
+          <div class="ni-owner ni-both">Both</div>
+          <div><div class="ni-action">First campaigns live — April 1</div><div class="ni-note">Organic First: 2–3 posts live on Steph's Facebook. Straight to Ads: 1–2 Meta campaigns with unique attribution URLs per variant. Day 3 signal check — pause or scale from there.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-bar">
+      <div class="pb-eyebrow">The 45-day outcome</div>
+      <div class="pb-text">Archer has a <em>repeatable brand-funded amplification product</em> — a case study with verified ROAS, a working platform for product selection and ad building, and a model that every one of Archer's 2,500+ seller brands will want to run. That's what Phase 1 delivers.</div>
+    </div>
+
+  </div><!-- end archer-view -->
+  <div class="footer">
+    <div class="footer-brand">EchoBoost <span>× Archer Affiliates</span></div>
+    <div class="footer-note">Phase 1 Test Plan · March 2026 · Kelly Hagen</div>
+  </div>
+
+</div>
+
+</div>
+</body>
+</html>
