@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EchoTribe × Archer — April Test Ad Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F4;
+    --surface: #FFFFFF;
+    --border: #E8E6E1;
+    --ink: #0F1020;
+    --ink-2: #2A2B3D;
+    --ink-3: #5A5B70;
+    --ink-muted: #8A8B9E;
+    --pink: #EC1A8D;
+    --pink-hover: #D1137A;
+    --pink-soft: #FDE8F3;
+    --pink-dark: #A10D5F;
+    --teal: #006a65;
+    --warm-red: #ae2f34;
+    --shadow-sm: 0 1px 2px rgba(15,16,32,0.04), 0 4px 16px rgba(15,16,32,0.04);
+    --shadow-md: 0 2px 8px rgba(15,16,32,0.06), 0 8px 32px rgba(15,16,32,0.08);
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .doc-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border);
+    padding: 48px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(236,26,141,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .doc-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .doc-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pink);
+    background: rgba(236,26,141,0.12);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .doc-title {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .doc-title em {
+    color: var(--pink);
+    font-style: italic;
+  }
+  .doc-subtitle {
+    color: var(--ink-3);
+    font-size: 15px;
+    max-width: 560px;
+  }
+  .doc-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .doc-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .doc-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+  }
+  .doc-meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* SECTION */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 60px 0;
+  }
+  .section:last-child { padding-bottom: 80px; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--ink-3);
+    margin-bottom: 36px;
+    max-width: 600px;
+  }
+
+  /* BRAND DIVIDER */
+  .brand-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 56px 0 32px;
+  }
+  .brand-divider-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--pink);
+    flex-shrink: 0;
+  }
+  .brand-divider-name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .brand-divider-stats {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    background: var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .brand-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* AD + LANDING PAIR */
+  .ad-pair {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+    align-items: start;
+  }
+
+  /* FACEBOOK AD MOCKUP */
+  .fb-ad {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    border: 1px solid #ddd;
+    position: sticky;
+    top: 24px;
+  }
+  .fb-ad-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px 8px;
+  }
+  .fb-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f6a5c0, #e91e8c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .fb-avatar-emoji { font-size: 20px; }
+  .fb-page-info { flex: 1; }
+  .fb-page-name {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #050505;
+    line-height: 1.3;
+  }
+  .fb-page-sub {
+    font-size: 11.5px;
+    color: #65676b;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .fb-sponsored-dot {
+    width: 3px; height: 3px;
+    background: #65676b;
+    border-radius: 50%;
+  }
+  .fb-more { color: #65676b; font-size: 18px; cursor: pointer; }
+
+  .fb-caption {
+    padding: 0 14px 10px;
+    font-size: 14px;
+    color: #050505;
+    line-height: 1.5;
+  }
+  .fb-caption strong { font-weight: 700; }
+  .fb-caption .emoji { font-style: normal; }
+
+  .fb-product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Wise Owl product image */
+  .img-wise-owl {
+    background: linear-gradient(145deg, #e8f4e8, #c8e8c8);
+    position: relative;
+  }
+  .img-wise-owl-single {
+    background: linear-gradient(145deg, #dff0e0, #b8dfc0);
+  }
+
+  /* Jay Franco product image */
+  .img-jay-franco {
+    background: linear-gradient(145deg, #e8eef8, #c5d5f0);
+  }
+  .img-jay-franco-single {
+    background: linear-gradient(145deg, #eef2ff, #d0dcf8);
+  }
+
+  /* SpaceAid product image */
+  .img-spaceaid {
+    background: linear-gradient(145deg, #f5f0e8, #e8dcc8);
+  }
+  .img-spaceaid-single {
+    background: linear-gradient(145deg, #f8f2e8, #eddcc8);
+  }
+
+  .product-visual {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+  }
+
+  .product-icon {
+    font-size: 80px;
+    line-height: 1;
+  }
+
+  .multi-product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+  }
+  .multi-product-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+    gap: 6px;
+    position: relative;
+  }
+  .multi-product-cell:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 10%; bottom: 10%;
+    width: 1px;
+    background: rgba(255,255,255,0.4);
+  }
+  .multi-product-cell:nth-child(1):nth-last-child(n+3)::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: rgba(255,255,255,0.4);
+  }
+  .multi-product-cell .product-icon { font-size: 44px; }
+  .multi-product-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.5);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .fb-ad-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .fb-product-card {
+    border-top: 1px solid #e0e0e0;
+    background: #f0f2f5;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .fb-product-card-info { flex: 1; min-width: 0; }
+  .fb-product-card-url {
+    font-size: 10px;
+    color: #65676b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+  .fb-product-card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #050505;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fb-product-card-sub {
+    font-size: 12px;
+    color: #65676b;
+    margin-top: 2px;
+  }
+  .fb-shop-btn {
+    background: #0866ff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .fb-reactions {
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #65676b;
+    border-top: 1px solid #e0e0e0;
+  }
+  .fb-react-left { display: flex; align-items: center; gap: 4px; }
+  .fb-react-emojis { font-size: 14px; }
+
+  /* AD TYPE BADGE */
+  .ad-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .badge-single {
+    background: var(--pink-soft);
+    color: var(--pink-dark);
+  }
+  .badge-multi {
+    background: #E8F4E8;
+    color: #1a5c2a;
+  }
+  .badge-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* LANDING PAGE MOCKUP */
+  .landing-mockup {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  /* Browser chrome */
+  .browser-chrome {
+    background: #F0F0F0;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .browser-dots {
+    display: flex;
+    gap: 5px;
+  }
+  .browser-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .browser-dot.red { background: #FF5F57; }
+  .browser-dot.yellow { background: #FFBD2E; }
+  .browser-dot.green { background: #28C840; }
+  .browser-url {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #555;
+  }
+
+  /* Landing page inner */
+  .lp-inner {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  /* MommyMe landing header */
+  .lp-header {
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid #F0EEE9;
+  }
+  .lp-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f6a5c0, #e91e8c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .lp-handle { font-size: 11px; color: #888; margin-top: 2px; }
+  .lp-header-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1a1a2e;
+  }
+  .lp-header-tagline {
+    font-size: 11px;
+    color: #888;
+  }
+  .lp-follow-btn {
+    margin-left: auto;
+    background: #EC1A8D;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .lp-hero-banner {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #F0EEE9;
+  }
+  .lp-hero-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .lp-hero-text {
+    font-size: 14px;
+    color: #2a2a3d;
+    line-height: 1.4;
+  }
+  .lp-hero-text strong { color: #EC1A8D; }
+
+  .lp-products {
+    padding: 16px 24px;
+  }
+  .lp-products-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #aaa;
+    margin-bottom: 14px;
+  }
+
+  .lp-product-card {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #F5F3EF;
+    align-items: center;
+  }
+  .lp-product-card:last-child { border-bottom: none; }
+
+  .lp-product-img {
+    width: 70px; height: 70px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  .lp-product-info { flex: 1; min-width: 0; }
+  .lp-product-brand {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #aaa;
+    margin-bottom: 3px;
+  }
+  .lp-product-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a2e;
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .lp-product-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lp-product-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .lp-product-rating {
+    font-size: 11px;
+    color: #888;
+  }
+  .lp-steph-pick {
+    font-size: 10px;
+    background: #FDE8F3;
+    color: #A10D5F;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .lp-shop-btn {
+    background: #EC1A8D;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .lp-shop-btn.outline {
+    background: transparent;
+    color: #EC1A8D;
+    border: 1.5px solid #EC1A8D;
+  }
+
+  .lp-footer {
+    background: #FAF8F5;
+    padding: 12px 24px;
+    text-align: center;
+    border-top: 1px solid #F0EEE9;
+  }
+  .lp-footer-text {
+    font-size: 10px;
+    color: #bbb;
+  }
+  .lp-footer-text a { color: #EC1A8D; text-decoration: none; }
+
+  /* ATTRIBUTION NOTE */
+  .attr-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .attr-note-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .attr-note-text {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .attr-note-text strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* SUMMARY TABLE */
+  .summary-card {
+    background: #F0EEE9;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    margin-top: 56px;
+    color: var(--ink);
+  }
+  .summary-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .summary-cell {
+    background: #FFFFFF;
+    padding: 20px;
+  }
+  .summary-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+  .summary-ads {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .summary-detail {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .summary-commission {
+    display: inline-block;
+    background: var(--pink-soft);
+    color: var(--pink-dark);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .test-params {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .test-param {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .test-param-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .test-param-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .section { padding: 40px 24px 0; }
+    .doc-header { padding: 36px 24px; }
+    .ad-pair { grid-template-columns: 1fr; }
+    .fb-ad { position: static; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .test-params { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-header-inner">
+    <div class="doc-eyebrow">EchoTribe × Archer Affiliates — April 2026 Test</div>
+    <h1 class="doc-title">Ad Creative & Landing Page<br><em>Mockups</em></h1>
+    <p class="doc-subtitle">3 brands · 6 ad concepts · 3 shoppable landing pages · @EverydaywithSteph</p>
+    <div class="doc-meta">
+      <div class="doc-meta-item">
+        <span class="doc-meta-label">Creator</span>
+        <span class="doc-meta-value">@EverydaywithSteph</span>
+      </div>
+      <div class="doc-meta-item">
+        <span class="doc-meta-label">Test Budget</span>
+        <span class="doc-meta-value">$4,500 ($1,500/brand)</span>
+      </div>
+      <div class="doc-meta-item">
+        <span class="doc-meta-label">Duration</span>
+        <span class="doc-meta-value">30 Days · April 2026</span>
+      </div>
+      <div class="doc-meta-item">
+        <span class="doc-meta-label">Paid Attribution</span>
+        <span class="doc-meta-value">Archer Links</span>
+      </div>
+      <div class="doc-meta-item">
+        <span class="doc-meta-label">Organic Attribution</span>
+        <span class="doc-meta-value">Creator Connections</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WISE OWL OUTFITTERS -->
+<div class="section">
+  <div class="brand-divider">
+    <div class="brand-divider-dot"></div>
+    <div class="brand-divider-name">Wise Owl Outfitters</div>
+    <div class="brand-divider-stats">$10,713 GMV · 514 units · 18% commission</div>
+    <div class="brand-divider-line"></div>
+  </div>
+
+  <!-- AD 1: Single Product Hero -->
+  <div class="ad-pair">
+    <div>
+      <div class="ad-type-badge badge-single"><span class="badge-dot"></span>Single Product · Hero Ad</div>
+      <div class="fb-ad">
+        <div class="fb-ad-header">
+          <div class="fb-avatar"><span class="fb-avatar-emoji">👩‍👧</span></div>
+          <div class="fb-page-info">
+            <div class="fb-page-name">The Mommy and Me Collective</div>
+            <div class="fb-page-sub">Sponsored <span class="fb-sponsored-dot"></span> @EverydaywithSteph</div>
+          </div>
+          <div class="fb-more">···</div>
+        </div>
+        <div class="fb-caption">
+          Ok mamas this hammock chair has been hanging in our backyard all spring and my kids literally fight over it 😅🌿<br><br>
+          <strong>Wise Owl Outfitters Hammock Chair</strong> — 4.8 stars, holds up to 500 lbs, folds up in seconds. We have ours on the porch and it goes everywhere with us.<br><br>
+          Linking it below — it's under $75 and worth every penny 🙌
+        </div>
+        <div class="fb-product-image img-wise-owl-single" style="aspect-ratio:1;">
+          <div class="product-visual">
+            <div class="product-icon">🪑</div>
+            <div style="font-size:11px; color:rgba(0,0,0,0.4); font-weight:600; text-align:center;">Wise Owl Hammock Chair<br>4.8★ · $74.99</div>
+          </div>
+          <div class="fb-ad-badge">Sponsored</div>
+        </div>
+        <div class="fb-product-card">
+          <div class="fb-product-card-info">
+            <div class="fb-product-card-url">mommyandmecollective.com</div>
+            <div class="fb-product-card-title">Wise Owl Hammock Chair — Steph's Pick</div>
+            <div class="fb-product-card-sub">Shop Steph's favorite outdoor finds →</div>
+          </div>
+          <button class="fb-shop-btn">Shop Now</button>
+        </div>
+        <div class="fb-reactions">
+          <div class="fb-react-left"><span class="fb-react-emojis">❤️👍😍</span> 847</div>
+          <div>312 comments · 1.2K shares</div>
+        </div>
+      </div>
+      <div class="attr-note">
+        <span class="attr-note-icon">🔗</span>
+        <div class="attr-note-text"><strong>Paid/Boosted:</strong> Archer attribution link · tracks clicks independently via URLGenius layer above Amazon · no basket halo, but brand earns +10% referral bonus vs. −10% CC commission = 20% economic swing.</div>
+      </div>
+    </div>
+
+    <!-- LANDING PAGE: Single Product -->
+    <div>
+      <div class="ad-type-badge badge-single" style="opacity:0; pointer-events:none;">placeholder</div>
+      <div class="landing-mockup">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot red"></div>
+            <div class="browser-dot yellow"></div>
+            <div class="browser-dot green"></div>
+          </div>
+          <div class="browser-url">mommyandmecollective.com/shop/wise-owl-hammock</div>
+        </div>
+        <div class="lp-inner">
+          <div class="lp-header">
+            <div class="lp-avatar">👩‍👧</div>
+            <div>
+              <div class="lp-header-name">The Mommy and Me Collective</div>
+              <div class="lp-handle">@EverydaywithSteph</div>
+            </div>
+            <button class="lp-follow-btn">Follow</button>
+          </div>
+          <div class="lp-hero-banner">
+            <div class="lp-hero-icon">🌿</div>
+            <div class="lp-hero-text"><strong>Steph's outdoor pick this spring</strong> — the hammock chair her family actually uses every day.</div>
+          </div>
+          <div class="lp-products">
+            <div class="lp-products-label">Featured Product</div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#e8f4e8;">🪑</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">Wise Owl Outfitters</div>
+                <div class="lp-product-name">Hammock Chair for Adults — Portable, Foldable, 500 lb Capacity</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$74.99</span>
+                  <span class="lp-product-rating">⭐ 4.8 (44 reviews)</span>
+                </div>
+                <div style="margin-top:4px;"><span class="lp-steph-pick">Steph's Pick 🌿</span></div>
+              </div>
+              <button class="lp-shop-btn">Shop →</button>
+            </div>
+            <div style="padding:16px 0 8px; font-size:13px; color:#555; line-height:1.6; border-top:1px solid #F5F3EF; margin-top:6px;">
+              <em>"This is genuinely one of my favorite things we bought this year. It hangs in like 5 minutes and folds down to nothing. My kids call it the 'sky chair' 😂"</em>
+            </div>
+          </div>
+          <div class="lp-footer">
+            <div class="lp-footer-text">Steph earns a small commission when you shop her links — thank you for supporting! 💕 · <a href="#">@EverydaywithSteph</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD 2: Multi Product Outdoor Bundle -->
+  <div class="ad-pair">
+    <div>
+      <div class="ad-type-badge badge-multi"><span class="badge-dot"></span>Multi-Product · Bundle Ad</div>
+      <div class="fb-ad">
+        <div class="fb-ad-header">
+          <div class="fb-avatar"><span class="fb-avatar-emoji">👩‍👧</span></div>
+          <div class="fb-page-info">
+            <div class="fb-page-name">The Mommy and Me Collective</div>
+            <div class="fb-page-sub">Sponsored <span class="fb-sponsored-dot"></span> @EverydaywithSteph</div>
+          </div>
+          <div class="fb-more">···</div>
+        </div>
+        <div class="fb-caption">
+          Building your outdoor setup for spring? Here are my Wise Owl picks that actually get used 🌳☀️<br><br>
+          The hammock chair is the star but the sleeping bag has saved us on SO many camping trips. Both under $80 and both have thousands of great reviews 🙌
+        </div>
+        <div class="fb-product-image img-wise-owl" style="aspect-ratio:1;">
+          <div class="multi-product-grid">
+            <div class="multi-product-cell" style="background:linear-gradient(145deg,#e0f0e0,#c0dcc0);">
+              <div class="product-icon" style="font-size:48px;">🪑</div>
+              <div class="multi-product-label">Hammock Chair<br>$74.99</div>
+            </div>
+            <div class="multi-product-cell" style="background:linear-gradient(145deg,#d8ecd8,#b8d8b8);">
+              <div class="product-icon" style="font-size:48px;">🛌</div>
+              <div class="multi-product-label">Sleeping Bag<br>$59.99</div>
+            </div>
+          </div>
+          <div class="fb-ad-badge">Sponsored</div>
+        </div>
+        <div class="fb-product-card">
+          <div class="fb-product-card-info">
+            <div class="fb-product-card-url">mommyandmecollective.com</div>
+            <div class="fb-product-card-title">Wise Owl Outfitters — Steph's Outdoor Shop</div>
+            <div class="fb-product-card-sub">2 products · All affiliate links →</div>
+          </div>
+          <button class="fb-shop-btn">Shop Now</button>
+        </div>
+        <div class="fb-reactions">
+          <div class="fb-react-left"><span class="fb-react-emojis">❤️👍😍</span> 623</div>
+          <div>204 comments · 889 shares</div>
+        </div>
+      </div>
+      <div class="attr-note">
+        <span class="attr-note-icon">🔗</span>
+        <div class="attr-note-text"><strong>Paid/Boosted:</strong> Each product card links to individual Archer attribution link · URLGenius smart link handles app-open routing · all clicks tracked independently of Amazon reporting.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="ad-type-badge badge-multi" style="opacity:0; pointer-events:none;">placeholder</div>
+      <div class="landing-mockup">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot red"></div>
+            <div class="browser-dot yellow"></div>
+            <div class="browser-dot green"></div>
+          </div>
+          <div class="browser-url">mommyandmecollective.com/shop/wise-owl-spring</div>
+        </div>
+        <div class="lp-inner">
+          <div class="lp-header">
+            <div class="lp-avatar">👩‍👧</div>
+            <div>
+              <div class="lp-header-name">The Mommy and Me Collective</div>
+              <div class="lp-handle">@EverydaywithSteph</div>
+            </div>
+            <button class="lp-follow-btn">Follow</button>
+          </div>
+          <div class="lp-hero-banner">
+            <div class="lp-hero-icon">☀️</div>
+            <div class="lp-hero-text"><strong>Steph's Spring Outdoor Picks</strong> — the Wise Owl gear she actually uses with her family.</div>
+          </div>
+          <div class="lp-products">
+            <div class="lp-products-label">2 Products</div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#e8f4e8;">🪑</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">Wise Owl Outfitters</div>
+                <div class="lp-product-name">Hammock Chair — Portable, Foldable</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$74.99</span>
+                  <span class="lp-product-rating">⭐ 4.8</span>
+                  <span class="lp-steph-pick">Top Pick</span>
+                </div>
+              </div>
+              <button class="lp-shop-btn">Shop →</button>
+            </div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#d8ecd8;">🛌</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">Wise Owl Outfitters</div>
+                <div class="lp-product-name">Sleeping Bag — Lightweight Camping</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$59.99</span>
+                  <span class="lp-product-rating">⭐ 4.7</span>
+                </div>
+              </div>
+              <button class="lp-shop-btn outline">Shop →</button>
+            </div>
+          </div>
+          <div class="lp-footer">
+            <div class="lp-footer-text">Steph earns a small commission when you shop her links — thank you for supporting! 💕 · <a href="#">@EverydaywithSteph</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAY FRANCO -->
+  <div class="brand-divider">
+    <div class="brand-divider-dot"></div>
+    <div class="brand-divider-name">Jay Franco</div>
+    <div class="brand-divider-stats">$2,899 GMV · 146 units · 7% commission · 10 matched ASINs</div>
+    <div class="brand-divider-line"></div>
+  </div>
+
+  <!-- AD 3: Single Product Hero -->
+  <div class="ad-pair">
+    <div>
+      <div class="ad-type-badge badge-single"><span class="badge-dot"></span>Single Product · Hero Ad</div>
+      <div class="fb-ad">
+        <div class="fb-ad-header">
+          <div class="fb-avatar"><span class="fb-avatar-emoji">👩‍👧</span></div>
+          <div class="fb-page-info">
+            <div class="fb-page-name">The Mommy and Me Collective</div>
+            <div class="fb-page-sub">Sponsored <span class="fb-sponsored-dot"></span> @EverydaywithSteph</div>
+          </div>
+          <div class="fb-more">···</div>
+        </div>
+        <div class="fb-caption">
+          If your little one is obsessed with superheroes this nap mat is everything 🦸‍♂️💙<br><br>
+          <strong>Jay Franco Marvel Hero Nap Mat</strong> — built-in pillow, rolls up easy, 4.7 stars with 541 reviews. We've had ours for years and it still looks great.<br><br>
+          Perfect for school, sleepovers, or just movie night at home 🎬 Under $33!
+        </div>
+        <div class="fb-product-image img-jay-franco-single" style="aspect-ratio:1;">
+          <div class="product-visual">
+            <div class="product-icon">🦸‍♂️</div>
+            <div style="font-size:11px; color:rgba(0,0,0,0.4); font-weight:600; text-align:center;">Marvel Hero Nap Mat<br>4.7★ · $32.99</div>
+          </div>
+          <div class="fb-ad-badge">Sponsored</div>
+        </div>
+        <div class="fb-product-card">
+          <div class="fb-product-card-info">
+            <div class="fb-product-card-url">mommyandmecollective.com</div>
+            <div class="fb-product-card-title">Jay Franco Marvel Nap Mat — Steph's Pick</div>
+            <div class="fb-product-card-sub">Shop Steph's kids' bedroom picks →</div>
+          </div>
+          <button class="fb-shop-btn">Shop Now</button>
+        </div>
+        <div class="fb-reactions">
+          <div class="fb-react-left"><span class="fb-react-emojis">❤️👍😍</span> 1.2K</div>
+          <div>487 comments · 2.1K shares</div>
+        </div>
+      </div>
+      <div class="attr-note">
+        <span class="attr-note-icon">🔗</span>
+        <div class="attr-note-text"><strong>Paid/Boosted:</strong> Archer attribution link · Jay Franco is the #1 unit mover (135 units, 1,531 clicks) making this the highest-confidence single product test for this brand.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="ad-type-badge badge-single" style="opacity:0; pointer-events:none;">placeholder</div>
+      <div class="landing-mockup">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot red"></div>
+            <div class="browser-dot yellow"></div>
+            <div class="browser-dot green"></div>
+          </div>
+          <div class="browser-url">mommyandmecollective.com/shop/jay-franco-hero-nap-mat</div>
+        </div>
+        <div class="lp-inner">
+          <div class="lp-header">
+            <div class="lp-avatar">👩‍👧</div>
+            <div>
+              <div class="lp-header-name">The Mommy and Me Collective</div>
+              <div class="lp-handle">@EverydaywithSteph</div>
+            </div>
+            <button class="lp-follow-btn">Follow</button>
+          </div>
+          <div class="lp-hero-banner">
+            <div class="lp-hero-icon">🦸‍♂️</div>
+            <div class="lp-hero-text"><strong>For the superhero kid in your life</strong> — Steph's most-gifted kids' bedding pick under $35.</div>
+          </div>
+          <div class="lp-products">
+            <div class="lp-products-label">Featured Product</div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#eef2ff;">🦸‍♂️</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">Jay Franco</div>
+                <div class="lp-product-name">Marvel Super Hero Adventures Hero Time Nap Mat — Built-in Pillow</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$32.99</span>
+                  <span class="lp-product-rating">⭐ 4.7 (541 reviews)</span>
+                </div>
+                <div style="margin-top:4px;"><span class="lp-steph-pick">Steph's Pick 🦸‍♂️</span></div>
+              </div>
+              <button class="lp-shop-btn">Shop →</button>
+            </div>
+            <div style="padding:16px 0 8px; font-size:13px; color:#555; line-height:1.6; border-top:1px solid #F5F3EF; margin-top:6px;">
+              <em>"This is our go-to gift for every kid birthday. Easy to roll up, easy to clean, and kids LOVE the characters. We've had ours for 2+ years."</em>
+            </div>
+          </div>
+          <div class="lp-footer">
+            <div class="lp-footer-text">Steph earns a small commission when you shop her links — thank you for supporting! 💕 · <a href="#">@EverydaywithSteph</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD 4: Multi Product Kids' Room Bundle -->
+  <div class="ad-pair">
+    <div>
+      <div class="ad-type-badge badge-multi"><span class="badge-dot"></span>Multi-Product · Kids' Room Bundle</div>
+      <div class="fb-ad">
+        <div class="fb-ad-header">
+          <div class="fb-avatar"><span class="fb-avatar-emoji">👩‍👧</span></div>
+          <div class="fb-page-info">
+            <div class="fb-page-name">The Mommy and Me Collective</div>
+            <div class="fb-page-sub">Sponsored <span class="fb-sponsored-dot"></span> @EverydaywithSteph</div>
+          </div>
+          <div class="fb-more">···</div>
+        </div>
+        <div class="fb-caption">
+          Redoing a kids' room without spending a fortune? Jay Franco is literally all over our house 🏠💙<br><br>
+          Nap mat, pop-up hamper, AND bath towel set — all under $35 each, all 4.6 stars or better. The hamper is one of my most recommended items ever — 10,000+ reviews! 🙌
+        </div>
+        <div class="fb-product-image img-jay-franco" style="aspect-ratio:1;">
+          <div class="multi-product-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="multi-product-cell" style="background:linear-gradient(145deg,#e8eef8,#c8d8f0);">
+              <div class="product-icon" style="font-size:40px;">🦸‍♂️</div>
+              <div class="multi-product-label">Hero Nap Mat<br>$32.99</div>
+            </div>
+            <div class="multi-product-cell" style="background:linear-gradient(145deg,#dce8f8,#bccce8);">
+              <div class="product-icon" style="font-size:40px;">🧺</div>
+              <div class="multi-product-label">Pop-Up Hamper<br>$14.49</div>
+            </div>
+            <div class="multi-product-cell" style="background:linear-gradient(145deg,#e4ecf8,#c4d4ec); grid-column:span 2;">
+              <div class="product-icon" style="font-size:40px;">🛁</div>
+              <div class="multi-product-label">Bluey Bath Towel Set — $24.99</div>
+            </div>
+          </div>
+          <div class="fb-ad-badge">Sponsored</div>
+        </div>
+        <div class="fb-product-card">
+          <div class="fb-product-card-info">
+            <div class="fb-product-card-url">mommyandmecollective.com</div>
+            <div class="fb-product-card-title">Jay Franco — Steph's Kids' Room Picks</div>
+            <div class="fb-product-card-sub">3 products · All under $35 →</div>
+          </div>
+          <button class="fb-shop-btn">Shop Now</button>
+        </div>
+        <div class="fb-reactions">
+          <div class="fb-react-left"><span class="fb-react-emojis">❤️👍😍</span> 934</div>
+          <div>376 comments · 1.6K shares</div>
+        </div>
+      </div>
+      <div class="attr-note">
+        <span class="attr-note-icon">🔗</span>
+        <div class="attr-note-text"><strong>Organic posts</strong> → Creator Connections (full basket halo credit, Associates tag preserved). <strong>Boosted version</strong> → Archer attribution links per product. Landing page links update automatically based on campaign source.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="ad-type-badge badge-multi" style="opacity:0; pointer-events:none;">placeholder</div>
+      <div class="landing-mockup">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot red"></div>
+            <div class="browser-dot yellow"></div>
+            <div class="browser-dot green"></div>
+          </div>
+          <div class="browser-url">mommyandmecollective.com/shop/jay-franco-kids-room</div>
+        </div>
+        <div class="lp-inner">
+          <div class="lp-header">
+            <div class="lp-avatar">👩‍👧</div>
+            <div>
+              <div class="lp-header-name">The Mommy and Me Collective</div>
+              <div class="lp-handle">@EverydaywithSteph</div>
+            </div>
+            <button class="lp-follow-btn">Follow</button>
+          </div>
+          <div class="lp-hero-banner">
+            <div class="lp-hero-icon">🏠</div>
+            <div class="lp-hero-text"><strong>Steph's Jay Franco kids' room picks</strong> — all under $35, all loved by her family.</div>
+          </div>
+          <div class="lp-products">
+            <div class="lp-products-label">3 Products</div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#eef2ff;">🦸‍♂️</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">Jay Franco</div>
+                <div class="lp-product-name">Marvel Hero Time Nap Mat — Built-in Pillow</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$32.99</span>
+                  <span class="lp-product-rating">⭐ 4.7</span>
+                  <span class="lp-steph-pick">Top Pick</span>
+                </div>
+              </div>
+              <button class="lp-shop-btn">Shop →</button>
+            </div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#e8f0fc;">🧺</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">Jay Franco</div>
+                <div class="lp-product-name">Monster Jam Pop-Up Hamper — Mesh Laundry Bag</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$14.49</span>
+                  <span class="lp-product-rating">⭐ 4.7 (10,635 reviews)</span>
+                </div>
+              </div>
+              <button class="lp-shop-btn outline">Shop →</button>
+            </div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#e8eef8;">🛁</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">Jay Franco</div>
+                <div class="lp-product-name">Bluey & Bingo Bath Towel & Bath Buddy Set</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$24.99</span>
+                  <span class="lp-product-rating">⭐ 4.6</span>
+                </div>
+              </div>
+              <button class="lp-shop-btn outline">Shop →</button>
+            </div>
+          </div>
+          <div class="lp-footer">
+            <div class="lp-footer-text">Steph earns a small commission when you shop her links — thank you for supporting! 💕 · <a href="#">@EverydaywithSteph</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPACEAID -->
+  <div class="brand-divider">
+    <div class="brand-divider-dot"></div>
+    <div class="brand-divider-name">SpaceAid</div>
+    <div class="brand-divider-stats">$1,409 GMV · 78 units · 14% commission · 5 matched ASINs</div>
+    <div class="brand-divider-line"></div>
+  </div>
+
+  <!-- AD 5: Single Product Hero -->
+  <div class="ad-pair">
+    <div>
+      <div class="ad-type-badge badge-single"><span class="badge-dot"></span>Single Product · Hero Ad</div>
+      <div class="fb-ad">
+        <div class="fb-ad-header">
+          <div class="fb-avatar"><span class="fb-avatar-emoji">👩‍👧</span></div>
+          <div class="fb-page-info">
+            <div class="fb-page-name">The Mommy and Me Collective</div>
+            <div class="fb-page-sub">Sponsored <span class="fb-sponsored-dot"></span> @EverydaywithSteph</div>
+          </div>
+          <div class="fb-more">···</div>
+        </div>
+        <div class="fb-caption">
+          If you have shoes EVERYWHERE like we do — this thing is a game changer 👟🌀<br><br>
+          <strong>SpaceAid 7-Tier Rotating Shoe Tower</strong> — fits 35+ pairs, spins 360°, looks really good too. We put ours in the mudroom and I can't believe we lived without it.<br><br>
+          Under $150 and it pays for itself in sanity alone 😂 Linking below!
+        </div>
+        <div class="fb-product-image img-spaceaid-single" style="aspect-ratio:1;">
+          <div class="product-visual">
+            <div class="product-icon">👟</div>
+            <div style="font-size:11px; color:rgba(0,0,0,0.4); font-weight:600; text-align:center;">7-Tier Rotating Shoe Tower<br>4.2★ · $149.98</div>
+          </div>
+          <div class="fb-ad-badge">Sponsored</div>
+        </div>
+        <div class="fb-product-card">
+          <div class="fb-product-card-info">
+            <div class="fb-product-card-url">mommyandmecollective.com</div>
+            <div class="fb-product-card-title">SpaceAid Shoe Tower — Steph's Pick</div>
+            <div class="fb-product-card-sub">Shop Steph's home organization picks →</div>
+          </div>
+          <button class="fb-shop-btn">Shop Now</button>
+        </div>
+        <div class="fb-reactions">
+          <div class="fb-react-left"><span class="fb-react-emojis">❤️👍😍</span> 1.8K</div>
+          <div>712 comments · 3.4K shares</div>
+        </div>
+      </div>
+      <div class="attr-note">
+        <span class="attr-note-icon">🔗</span>
+        <div class="attr-note-text"><strong>Highest commission brand:</strong> 14% on $149.98 = ~$21 per unit. This ASIN alone drove 74 of 78 SpaceAid units and all 1,090 clicks — concentrate paid spend here first before testing multi-product.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="ad-type-badge badge-single" style="opacity:0; pointer-events:none;">placeholder</div>
+      <div class="landing-mockup">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot red"></div>
+            <div class="browser-dot yellow"></div>
+            <div class="browser-dot green"></div>
+          </div>
+          <div class="browser-url">mommyandmecollective.com/shop/spaceaid-shoe-tower</div>
+        </div>
+        <div class="lp-inner">
+          <div class="lp-header">
+            <div class="lp-avatar">👩‍👧</div>
+            <div>
+              <div class="lp-header-name">The Mommy and Me Collective</div>
+              <div class="lp-handle">@EverydaywithSteph</div>
+            </div>
+            <button class="lp-follow-btn">Follow</button>
+          </div>
+          <div class="lp-hero-banner">
+            <div class="lp-hero-icon">🏠</div>
+            <div class="lp-hero-text"><strong>Steph's #1 home organization find</strong> — the shoe tower that actually fixed her mudroom chaos.</div>
+          </div>
+          <div class="lp-products">
+            <div class="lp-products-label">Featured Product</div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#f5f0e8;">👟</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">SpaceAid</div>
+                <div class="lp-product-name">7-Tier Rotating Shoe Rack Tower — Spinning Lazy Susan Display</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$149.98</span>
+                  <span class="lp-product-rating">⭐ 4.2 (330 reviews)</span>
+                </div>
+                <div style="margin-top:4px;"><span class="lp-steph-pick">Steph's Pick 👟</span></div>
+              </div>
+              <button class="lp-shop-btn">Shop →</button>
+            </div>
+            <div style="padding:16px 0 8px; font-size:13px; color:#555; line-height:1.6; border-top:1px solid #F5F3EF; margin-top:6px;">
+              <em>"I was NOT prepared for how much this would change my life 😂 It spins, it's sturdy, it holds way more than I expected. Mudroom is a completely different place now."</em>
+            </div>
+          </div>
+          <div class="lp-footer">
+            <div class="lp-footer-text">Steph earns a small commission when you shop her links — thank you for supporting! 💕 · <a href="#">@EverydaywithSteph</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD 6: Multi Product Home Organization -->
+  <div class="ad-pair">
+    <div>
+      <div class="ad-type-badge badge-multi"><span class="badge-dot"></span>Multi-Product · Home Org Bundle</div>
+      <div class="fb-ad">
+        <div class="fb-ad-header">
+          <div class="fb-avatar"><span class="fb-avatar-emoji">👩‍👧</span></div>
+          <div class="fb-page-info">
+            <div class="fb-page-name">The Mommy and Me Collective</div>
+            <div class="fb-page-sub">Sponsored <span class="fb-sponsored-dot"></span> @EverydaywithSteph</div>
+          </div>
+          <div class="fb-more">···</div>
+        </div>
+        <div class="fb-caption">
+          Spring cleaning mode = officially activated 🧹✨<br><br>
+          These SpaceAid finds have genuinely made our home so much more organized — the shoe tower plus the rotating bookshelf from the kids' room is such a combo 👏<br><br>
+          Both have great reviews and ship fast. Links are all in one place below 🙌
+        </div>
+        <div class="fb-product-image img-spaceaid" style="aspect-ratio:1;">
+          <div class="multi-product-grid">
+            <div class="multi-product-cell" style="background:linear-gradient(145deg,#f0ece0,#ddd0b8);">
+              <div class="product-icon" style="font-size:48px;">👟</div>
+              <div class="multi-product-label">Shoe Tower<br>$149.98</div>
+            </div>
+            <div class="multi-product-cell" style="background:linear-gradient(145deg,#e8e4d8,#ccc0a8);">
+              <div class="product-icon" style="font-size:48px;">📚</div>
+              <div class="multi-product-label">Rotating Bookshelf<br>$79.96</div>
+            </div>
+          </div>
+          <div class="fb-ad-badge">Sponsored</div>
+        </div>
+        <div class="fb-product-card">
+          <div class="fb-product-card-info">
+            <div class="fb-product-card-url">mommyandmecollective.com</div>
+            <div class="fb-product-card-title">SpaceAid — Steph's Home Org Picks</div>
+            <div class="fb-product-card-sub">2 products · Spring organization →</div>
+          </div>
+          <button class="fb-shop-btn">Shop Now</button>
+        </div>
+        <div class="fb-reactions">
+          <div class="fb-react-left"><span class="fb-react-emojis">❤️👍😍</span> 1.4K</div>
+          <div>531 comments · 2.2K shares</div>
+        </div>
+      </div>
+      <div class="attr-note">
+        <span class="attr-note-icon">🔗</span>
+        <div class="attr-note-text"><strong>Strategy note:</strong> SpaceAid Rotating Bookshelf ($79.96, 4.1★) is an untested ASIN with strong review count (488). Pairing it with the proven shoe tower reduces risk while testing a second SKU. Recommend starting single-product first if budget is tight.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="ad-type-badge badge-multi" style="opacity:0; pointer-events:none;">placeholder</div>
+      <div class="landing-mockup">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot red"></div>
+            <div class="browser-dot yellow"></div>
+            <div class="browser-dot green"></div>
+          </div>
+          <div class="browser-url">mommyandmecollective.com/shop/spaceaid-home-org</div>
+        </div>
+        <div class="lp-inner">
+          <div class="lp-header">
+            <div class="lp-avatar">👩‍👧</div>
+            <div>
+              <div class="lp-header-name">The Mommy and Me Collective</div>
+              <div class="lp-handle">@EverydaywithSteph</div>
+            </div>
+            <button class="lp-follow-btn">Follow</button>
+          </div>
+          <div class="lp-hero-banner">
+            <div class="lp-hero-icon">✨</div>
+            <div class="lp-hero-text"><strong>Steph's spring organization picks</strong> — the SpaceAid pieces that actually work in a busy family home.</div>
+          </div>
+          <div class="lp-products">
+            <div class="lp-products-label">2 Products</div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#f5f0e8;">👟</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">SpaceAid</div>
+                <div class="lp-product-name">7-Tier Rotating Shoe Rack Tower</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$149.98</span>
+                  <span class="lp-product-rating">⭐ 4.2</span>
+                  <span class="lp-steph-pick">Most Sold</span>
+                </div>
+              </div>
+              <button class="lp-shop-btn">Shop →</button>
+            </div>
+            <div class="lp-product-card">
+              <div class="lp-product-img" style="background:#ede8d8;">📚</div>
+              <div class="lp-product-info">
+                <div class="lp-product-brand">SpaceAid</div>
+                <div class="lp-product-name">4-Tier Rotating Bookcase — Lazy Susan Bookshelf</div>
+                <div class="lp-product-meta">
+                  <span class="lp-product-price">$79.96</span>
+                  <span class="lp-product-rating">⭐ 4.1 (488 reviews)</span>
+                </div>
+              </div>
+              <button class="lp-shop-btn outline">Shop →</button>
+            </div>
+          </div>
+          <div class="lp-footer">
+            <div class="lp-footer-text">Steph earns a small commission when you shop her links — thank you for supporting! 💕 · <a href="#">@EverydaywithSteph</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-card">
+    <div class="summary-card-title">April Test — Ad Plan at a Glance</div>
+    <div class="summary-grid">
+      <div class="summary-cell">
+        <div class="summary-brand">Wise Owl Outfitters</div>
+        <div class="summary-ads">2 Ad Concepts</div>
+        <div class="summary-detail">Hero: Hammock Chair ($74.99)<br>Bundle: Hammock + Sleeping Bag<br>$10,713 historical GMV · 514 units</div>
+        <span class="summary-commission">18% commission</span>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-brand">Jay Franco</div>
+        <div class="summary-ads">2 Ad Concepts</div>
+        <div class="summary-detail">Hero: Marvel Nap Mat ($32.99)<br>Bundle: Nap Mat + Hamper + Bath Set<br>10 matched ASINs · 1,531 clicks</div>
+        <span class="summary-commission">7% commission</span>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-brand">SpaceAid</div>
+        <div class="summary-ads">2 Ad Concepts</div>
+        <div class="summary-detail">Hero: 7-Tier Shoe Tower ($149.98)<br>Bundle: Shoe Tower + Bookshelf<br>74 of 78 units from hero ASIN</div>
+        <span class="summary-commission">14% commission</span>
+      </div>
+    </div>
+    <div class="test-params">
+      <div class="test-param">
+        <div class="test-param-label">Total Budget</div>
+        <div class="test-param-value">$4,500</div>
+      </div>
+      <div class="test-param">
+        <div class="test-param-label">Per Brand</div>
+        <div class="test-param-value">$1,500</div>
+      </div>
+      <div class="test-param">
+        <div class="test-param-label">Duration</div>
+        <div class="test-param-value">30 Days</div>
+      </div>
+      <div class="test-param">
+        <div class="test-param-label">Checkpoint</div>
+        <div class="test-param-value">Mid-April</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /section -->
+
+</body>
+</html>
